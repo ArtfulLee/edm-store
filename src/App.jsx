@@ -1,9 +1,13 @@
-function App() {
+import { Card } from "./components/ui/Card/Card";
+
+const App = () => {
   return (
     <>
-      <h1>EDM Store</h1>
+      <div className="container mx-auto p-4">
+        <Card />
+      </div>
     </>
   );
-}
+};
 
 export default App;
