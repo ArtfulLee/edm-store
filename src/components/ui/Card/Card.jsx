@@ -16,12 +16,13 @@ import { useState, useEffect, useRef } from "react";
 const Card = (props) => {
   const { imgSrc, audioSrs, price, trackName, artist } = props.details;
 
-  // Ссылка на текущий трек
+  // Ссылка на текущее аудио
   const audioSourse = useRef(new Audio(audioSrs));
 
-  // Состояние проигрывания трека вкл/выкл
+  // Состояние проигрывания аудио вкл/выкл
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Вкл/выкл трек на основании состояния аудио
   useEffect(() => {
     if (isPlaying) {
       audioSourse.current.play();
@@ -33,6 +34,7 @@ const Card = (props) => {
   return (
     <>
       <div className="bg-neutral-800 max-w-60 p-2">
+        {/* Start Обложка аудио + элементы управления */}
         <div className="group relative">
           <img
             className="w-full md:w-72 block"
@@ -40,6 +42,7 @@ const Card = (props) => {
             alt="audio-cover"
           />
           <div className="absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
+            {/* Start кнопка Play */}
             {isPlaying ? (
               <button
                 className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
@@ -73,8 +76,11 @@ const Card = (props) => {
                 </svg>
               </button>
             )}
+            {/* End кнопка Play */}
           </div>
         </div>
+        {/* End Обложка аудио + элементы управления */}
+        {/* Start Информация по карточке */}
         <div className="pt-2">
           <p className="line-clamp-1 text-neutral-50 text-lg">{trackName}</p>
           <p className="line-clamp-1 text-neutral-500">{artist}</p>
@@ -82,6 +88,7 @@ const Card = (props) => {
             <button className="line-clamp-1 text-neutral-500">{price}</button>
           </div>
         </div>
+        {/* End Информация по карточке */}
       </div>
     </>
   );
