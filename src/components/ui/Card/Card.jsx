@@ -33,7 +33,7 @@ const Card = (props) => {
 
   return (
     <>
-      <div className="bg-neutral-800 max-w-60 p-2">
+      <div className="bg-neutral-800 max-w-60 p-4">
         {/* Start Обложка аудио + элементы управления */}
         <div className="group relative">
           <img
