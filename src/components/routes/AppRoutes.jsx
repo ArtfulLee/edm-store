@@ -12,7 +12,7 @@ const routes = [
 { path: "audio-card/:id", element: <AudioCard /> }, */
 
 /**
- * Рекурсивно отображает роуты и и дочерние роуты.
+ * Рекурсивно отображает роуты и дочерние роуты.
  * @param {RouteItem[]} routes - Массив роутов.
  * @returns {JSX.Element[]} Массив JSX элементов роутов.
  */

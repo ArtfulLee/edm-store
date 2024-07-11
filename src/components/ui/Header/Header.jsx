@@ -11,7 +11,6 @@ const navItems = [
  * Компонент Шапка.
  * @returns {JSX.Element} Элемент header.
  */
-
 const Header = () => {
   const location = useLocation();
 
