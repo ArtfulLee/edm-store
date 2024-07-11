@@ -1,6 +1,32 @@
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+import { NavLink, useLocation } from "react-router-dom";
+
+/** Массив пунктов меню */
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "Genres", path: "/genres" },
+];
+
+/**
+ * Компонент Шапка.
+ * @returns {JSX.Element} Элемент header.
+ */
 
 const Header = () => {
+  const location = useLocation();
+
+  /**
+   * Определяет, активна ли ссылка.
+   * @param {string} path - Путь ссылки.
+   * @returns {boolean} ссылка активна или нет.
+   */
+  const isActiveLink = (path) => {
+    return (
+      location?.pathname === path
+      /*|| (path === "/cards" && location?.pathname?.startsWith("/cards")) */
+    );
+  };
+
   return (
     <>
       <header className=" bg-neutral-900">
@@ -10,8 +36,15 @@ const Header = () => {
             <div className="text-neutral-50 font-bold text-lg">EDM STORE</div>
           </div>
           <div className="flex text-neutral-50 space-x-8">
-            <div>Home</div>
-            <div>Genres</div>
+            {navItems?.map((item) => (
+              <NavLink
+                to={item?.path}
+                key={item?.path}
+                className={`${isActiveLink(item?.path) ? "text-pink-500" : ""}`}
+              >
+                {item?.name}
+              </NavLink>
+            ))}
           </div>
           {/* Сюда надо будет добавить авторизацию */}
         </div>
