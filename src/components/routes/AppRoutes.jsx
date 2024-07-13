@@ -8,8 +8,8 @@ const routes = [
   { path: "/", element: <Home /> },
   { path: "genres", element: <Genres /> },
 ];
-/* ,
-{ path: "audio-card/:id", element: <AudioCard /> }, */
+
+/*{ path: "audio-card/:id", element: <AudioCard /> }, */
 
 /**
  * Рекурсивно отображает роуты и дочерние роуты.

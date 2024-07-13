@@ -6,13 +6,13 @@ import useMusicStore from "../../../store/useMusicStore";
  * @returns {JSX.Element} Элемент JSX.
  */
 const AudioCards = () => {
+  // Получаем всю музыку со стора
   const allMusicOfStore = useMusicStore((state) => state.allMusicOfStore);
-
-  console.log("array", allMusicOfStore);
 
   return (
     <>
       <div className="flex justify-between flex-wrap py-4">
+        {/* Возвращаем аудио карточки */}
         {!!allMusicOfStore.length &&
           allMusicOfStore.map((track) => {
             return <AudioCard key={track.idOfTrack} details={track} />;
