@@ -1,5 +1,8 @@
-import { nanoid } from "nanoid";
+// Сторы
 import { create } from "zustand";
+
+// Утилиты
+import { nanoid } from "nanoid";
 
 /**
  * Музыкальное хранилище
@@ -19,6 +22,7 @@ const useMusicStore = create(() => ({
       nameOfTrack: "Bronx Posse",
       artist: "Skool Of Thought, Stanton Warriors",
       genre: "Breaks",
+      label: "Against The Grain",
       isFavorite: false,
       numberOfSales: 0,
     },
@@ -32,6 +36,7 @@ const useMusicStore = create(() => ({
       nameOfTrack: "Get Ready",
       artist: "Aggresivnes",
       genre: "Breaks",
+      label: "Elektroshok Records",
       isFavorite: false,
       numberOfSales: 0,
     },
@@ -45,6 +50,7 @@ const useMusicStore = create(() => ({
       nameOfTrack: "Gold Dust",
       artist: "Krafty Kuts, DJ Fresh",
       genre: "Breaks",
+      label: "Breakbeat Kaos",
       isFavorite: false,
       numberOfSales: 0,
     },
@@ -58,6 +64,7 @@ const useMusicStore = create(() => ({
       nameOfTrack: "Hot Like Fire",
       artist: "Ondamike",
       genre: "Breaks",
+      label: "Ravesta Records",
       isFavorite: false,
       numberOfSales: 0,
     },
@@ -71,6 +78,7 @@ const useMusicStore = create(() => ({
       nameOfTrack: "Afrodisiac",
       artist: "Skool Of Thought, Stanton Warriors",
       genre: "Breaks",
+      label: "Central Station Records",
       isFavorite: false,
       numberOfSales: 0,
     },
@@ -84,13 +92,14 @@ const useMusicStore = create(() => ({
       nameOfTrack: "Badman",
       artist: "Krafty Kuts",
       genre: "Breaks",
+      label: "Against The Grain",
       isFavorite: false,
       numberOfSales: 0,
     },
   ],
 
   /**
-   * Добавление товара в стор
+   * Добавление аудио в стор
    * @param {string} imgSrc - Путь к изображению.
    * @param {string} audioSrs - Путь к аудио.
    * @param {string} price - Цена аудио.
