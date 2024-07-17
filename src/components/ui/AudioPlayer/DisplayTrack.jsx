@@ -27,9 +27,9 @@ const DisplayTrack = (props) => {
 
       {/* Данные аудио */}
       <div>
-        <div>{currentTrack.nameOfTrack}</div>
-        <div>{currentTrack.artist}</div>
-        <div>{currentTrack.label}</div>
+        <div className="text-neutral-50">{currentTrack.nameOfTrack}</div>
+        <div className="text-neutral-50">{currentTrack.artist}</div>
+        <div className="text-neutral-50">{currentTrack.label}</div>
       </div>
     </>
   );

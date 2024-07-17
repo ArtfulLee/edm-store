@@ -27,7 +27,7 @@ const AudioPlayer = () => {
   return (
     <>
       <div className="bg-neutral-900 py-4">
-        <div className="flex justify-center">
+        <div className="flex justify-center space-x-8">
           <DisplayTrack currentTrack={currentTrack} audioRef={audioRef} />
           <Controls audioRef={audioRef} />
           <ProgressBar />

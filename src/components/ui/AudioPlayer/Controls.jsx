@@ -41,7 +41,7 @@ const Controls = (props) => {
 
         {/* Переключение кнопок Play/Pause. */}
         <button
-          className="rounded-full w-12 h-12 bg-neutral-800"
+          className="rounded-full w-12 h-12 bg-neutral-700"
           onClick={togglePlayPause}
         >
           {isPlaying ? (
