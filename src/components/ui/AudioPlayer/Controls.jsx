@@ -1,0 +1,58 @@
+// React
+import { useState, useEffect } from "react";
+
+// Иконки
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+
+/**
+ * Компонент управления аудио плеером.
+ * @returns {JSX.Element} Элемент JSX.
+ */
+const Controls = (props) => {
+  const { audioRef } = props;
+
+  // Стейт для управления Play/Pause.
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Изменение отображения кнопок Play/Pause.
+  const togglePlayPause = () => {
+    setIsPlaying((prev) => !prev);
+  };
+
+  // Изменение состояния воспроизведения аудио от зависимости изменения стейта для управления Play/Pause или изменения референса на ссылку аудио.
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying, audioRef]);
+
+  return (
+    <>
+      {/* Предыдущий трек. */}
+      <button>
+        <SkipPreviousIcon className="text-neutral-50" fontSize="large" />
+      </button>
+
+      {/* Переключение кнопок Play/Pause. */}
+      <button onClick={togglePlayPause}>
+        {isPlaying ? (
+          <PauseIcon className="text-neutral-50" fontSize="large" />
+        ) : (
+          <PlayArrowIcon className="text-neutral-50" fontSize="large" />
+        )}
+      </button>
+
+      {/* Следующий трек. */}
+      <button>
+        <SkipNextIcon className="text-neutral-50" fontSize="large" />
+      </button>
+    </>
+  );
+};
+
+export default Controls;
