@@ -26,7 +26,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div className="py-4">
+      <div className="bg-neutral-900 py-4">
         <div className="flex justify-center">
           <DisplayTrack currentTrack={currentTrack} audioRef={audioRef} />
           <Controls audioRef={audioRef} />

@@ -33,24 +33,29 @@ const Controls = (props) => {
 
   return (
     <>
-      {/* Предыдущий трек. */}
-      <button>
-        <SkipPreviousIcon className="text-neutral-50" fontSize="large" />
-      </button>
+      <div className="flex items-center space-x-2">
+        {/* Предыдущий трек. */}
+        <button>
+          <SkipPreviousIcon className="text-neutral-50" fontSize="large" />
+        </button>
 
-      {/* Переключение кнопок Play/Pause. */}
-      <button onClick={togglePlayPause}>
-        {isPlaying ? (
-          <PauseIcon className="text-neutral-50" fontSize="large" />
-        ) : (
-          <PlayArrowIcon className="text-neutral-50" fontSize="large" />
-        )}
-      </button>
+        {/* Переключение кнопок Play/Pause. */}
+        <button
+          className="rounded-full w-12 h-12 bg-neutral-800"
+          onClick={togglePlayPause}
+        >
+          {isPlaying ? (
+            <PauseIcon className="text-neutral-50" fontSize="large" />
+          ) : (
+            <PlayArrowIcon className="text-neutral-50" fontSize="large" />
+          )}
+        </button>
 
-      {/* Следующий трек. */}
-      <button>
-        <SkipNextIcon className="text-neutral-50" fontSize="large" />
-      </button>
+        {/* Следующий трек. */}
+        <button>
+          <SkipNextIcon className="text-neutral-50" fontSize="large" />
+        </button>
+      </div>
     </>
   );
 };
