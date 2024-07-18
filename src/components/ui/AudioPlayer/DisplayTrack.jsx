@@ -2,7 +2,9 @@
  * Компонент отображения текущей информации об аудио файле.
  * @param {object} props - Свойства компонента.
  * @param {object} props.audioRef - Референс на текущий объект аудио файла.
- * @param {object} props.setDuration - Референс на текущий объект аудио файла.
+ * @param {function} props.setDuration - Функция для обработки длительности аудио файла.
+ * @param {object} props.progressBarRef - Референс на входные параметры прогрессбара.
+ * @param {function} props.handleNext - Обработчик для переключения на следующий аудиофайл.
  * @param {object} props.currentTrack - Детали карточки.
  * @param {string} props.currentTrack.idOfTrack - Идентификатор карточки.
  * @param {string} props.currentTrack.imgSrc - Путь к изображению.
@@ -17,12 +19,15 @@
  * @returns {JSXElement}
  */
 const DisplayTrack = (props) => {
-  const { currentTrack, audioRef, setDuration, progressBarRef, handleNext } = props;
+  const { currentTrack, audioRef, setDuration, progressBarRef, handleNext } =
+    props;
 
   // Получение длительности аудио файла в секундах.
   const onLoadedMetadata = () => {
     const timeOfAudio = audioRef.current.duration;
+    // Устанавливаем длительность аудио файла
     setDuration(timeOfAudio);
+    // Записываем значение "timeOfAudio" в атрибут "max" компонента progressBarRef
     progressBarRef.current.max = timeOfAudio;
   };
 
@@ -34,10 +39,11 @@ const DisplayTrack = (props) => {
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}
+        hidden /* А так можно? */
       />
 
       {/* Данные аудио файла */}
-      <div className="flex space-x-4">
+      <div className="flex space-x-2">
         <div className="w-20 h-20 flex justify-center justify-items-center">
           {currentTrack.imgSrc ? (
             <img
@@ -52,7 +58,7 @@ const DisplayTrack = (props) => {
             </div>
           )}
         </div>
-        <div className="max-w-96">
+        <div className="w-52 max-w-52">
           <div className="line-clamp-1 text-neutral-50 text-lg">
             {currentTrack.nameOfTrack}
           </div>

@@ -17,9 +17,9 @@ const ProgressBar = (props) => {
   return (
     <>
       <div className="flex items-center text-neutral-50 ">
-        <div className="progress space-x-4">
+        <div className="flex space-x-2">
           <span>{formatTime(timeProgress)}</span>
-          <input
+          <input className="accent-emerald-400"
             type="range"
             ref={progressBarRef}
             defaultValue="0"

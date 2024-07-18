@@ -8,7 +8,7 @@ const MainLayout = () => {
     <>
       <div className="flex flex-col justify-between bg-neutral-800 min-h-screen">
         <Header />
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 mt-16">
           <Outlet />
         </div>
         <AudioPlayer />

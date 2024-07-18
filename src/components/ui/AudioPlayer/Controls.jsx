@@ -120,6 +120,7 @@ const Controls = (props) => {
           )}
         </button>
         <input
+          className="accent-emerald-400"
           type="range"
           min={0}
           max={100}
