@@ -9,7 +9,7 @@ import { formatTime } from "../../../utils/formatTime";
 const ProgressBar = (props) => {
   const { progressBarRef, audioRef, timeProgress, duration } = props;
 
-  // Хендлер для отслеживания изменения входных значений прогрессбара.
+  // Обработчик для отслеживания изменения входных значений прогрессбара.
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };

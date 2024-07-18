@@ -4,18 +4,34 @@ import { useState, useEffect, useRef, useCallback } from "react";
 // Иконки
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeDownIcon from "@mui/icons-material/VolumeDown";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 
 /**
- * Компонент управления аудио плеером.
+ * Компонент управления аудио файла плеером.
  * @returns {JSX.Element} Элемент JSX.
  */
 const Controls = (props) => {
-  const { audioRef, progressBarRef, duration, setTimeProgress } = props;
+  const {
+    audioRef,
+    progressBarRef,
+    duration,
+    handlePrevious,
+    handleNext,
+    setTimeProgress,
+  } = props;
 
   // Стейт для управления Play/Pause.
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Стейт для управления громкостью аудио файла.
+  const [volume, setVolume] = useState(57);
+
+  // Стейт для управления отключения звука
+  const [muteVolume, setMuteVolume] = useState(false);
 
   // Изменение отображения кнопок Play/Pause.
   const togglePlayPause = () => {
@@ -25,7 +41,7 @@ const Controls = (props) => {
   // Референс для сохранения положения анимации прогрессбара.
   const playAnimationRef = useRef();
 
-  // Функция для .
+  // Функция для перерисовки анимации прогрессбара.
   const repeat = useCallback(() => {
     const currentTime = audioRef.current.currentTime;
     setTimeProgress(currentTime);
@@ -37,7 +53,7 @@ const Controls = (props) => {
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
-  // Изменение состояния воспроизведения аудио от зависимости изменения стейта для управления Play/Pause или изменения референса на ссылку аудио.
+  // Изменение состояния воспроизведения аудио файла от изменений зависимостей "стейта для управления Play/Pause" или "референса на аудио файл".
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play();
@@ -48,12 +64,25 @@ const Controls = (props) => {
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlaying, audioRef, repeat]);
 
+  // Изменение уровня громкости аудиофайла от изменений зависимостей "значения уровня громкости стейта изменения уровня громкости" или "референса на аудио файл".
+  useEffect(() => {
+    if (audioRef) {
+      // Поделили на 100 для синхронизации с инпутом.
+      audioRef.current.volume = volume / 100;
+      audioRef.current.muted = muteVolume;
+    }
+  }, [volume, audioRef, muteVolume]);
+
   return (
     <>
       <div className="flex items-center space-x-2">
-        {/* Предыдущий трек. */}
+        {/* Предыдущий аудио файл. */}
         <button>
-          <SkipPreviousIcon className="text-neutral-50" fontSize="large" />
+          <SkipPreviousIcon
+            className="text-neutral-50"
+            fontSize="large"
+            onClick={handlePrevious}
+          />
         </button>
 
         {/* Переключение кнопок Play/Pause. */}
@@ -68,10 +97,35 @@ const Controls = (props) => {
           )}
         </button>
 
-        {/* Следующий трек. */}
+        {/* Следующий аудио файл. */}
         <button>
-          <SkipNextIcon className="text-neutral-50" fontSize="large" />
+          <SkipNextIcon
+            className="text-neutral-50"
+            fontSize="large"
+            onClick={handleNext}
+          />
         </button>
+      </div>
+      <div className="flex items-center space-x-2">
+        <button
+          className="content-center text-center w-full h-full"
+          onClick={() => setMuteVolume((prev) => !prev)}
+        >
+          {muteVolume || volume < 1 ? (
+            <VolumeOffIcon className="text-neutral-50" fontSize="large" />
+          ) : volume < 40 ? (
+            <VolumeDownIcon className="text-neutral-50" fontSize="large" />
+          ) : (
+            <VolumeUpIcon className="text-neutral-50" fontSize="large" />
+          )}
+        </button>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={volume}
+          onChange={(event) => setVolume(event.target.value)}
+        />
       </div>
     </>
   );

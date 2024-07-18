@@ -15,19 +15,42 @@ import ProgressBar from "./ProgressBar";
  */
 const AudioPlayer = () => {
   // Получаем всю музыку из стора.
-  const allMusicOfStore = useMusicStore((state) => state.allMusicOfStore);
+  const musicOfStore = useMusicStore((state) => state.musicOfStore);
 
   // Референс на ссылку аудио файла.
   const audioRef = useRef();
   // Референс на входные параметры прогрессбара.
   const progressBarRef = useRef();
 
+  // Стейт для сохранения текущего индекса аудио файла.
+  const [trackIndex, setTrackIndex] = useState(0);
   // Стейт для изменения текущего аудио файла.
-  const [currentTrack, setCurrentTrack] = useState(allMusicOfStore[0]);
+  const [currentTrack, setCurrentTrack] = useState(musicOfStore[trackIndex]);
   // Стейт для отслеживания времени прогрессбара.
   const [timeProgress, setTimeProgress] = useState(0);
   // Стейт для хранения длительности аудио файла.
   const [duration, setDuration] = useState(0);
+
+  // Обработчики для управления переключением между аудио файлами.
+  const handlePrevious = () => {
+    if (trackIndex === 0) {
+      let lastTrackIndex = musicOfStore.length - 1;
+      setTrackIndex(lastTrackIndex);
+      setCurrentTrack(musicOfStore[lastTrackIndex]);
+    } else {
+      setTrackIndex((prev) => prev - 1);
+      setCurrentTrack(musicOfStore[trackIndex - 1]);
+    }
+  };
+  const handleNext = () => {
+    if (trackIndex >= musicOfStore.length - 1) {
+      setTrackIndex(0);
+      setCurrentTrack(musicOfStore[0]);
+    } else {
+      setTrackIndex((prev) => prev + 1);
+      setCurrentTrack(musicOfStore[trackIndex + 1]);
+    }
+  };
 
   return (
     <>
@@ -38,6 +61,7 @@ const AudioPlayer = () => {
             audioRef={audioRef}
             progressBarRef={progressBarRef}
             setDuration={setDuration}
+            handleNext={handleNext}
           />
           <ProgressBar
             audioRef={audioRef}
@@ -50,6 +74,8 @@ const AudioPlayer = () => {
             progressBarRef={progressBarRef}
             duration={duration}
             setTimeProgress={setTimeProgress}
+            handlePrevious={handlePrevious}
+            handleNext={handleNext}
           />
         </div>
       </div>

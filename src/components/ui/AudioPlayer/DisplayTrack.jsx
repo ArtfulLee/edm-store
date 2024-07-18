@@ -17,7 +17,7 @@
  * @returns {JSXElement}
  */
 const DisplayTrack = (props) => {
-  const { currentTrack, audioRef, setDuration, progressBarRef } = props;
+  const { currentTrack, audioRef, setDuration, progressBarRef, handleNext } = props;
 
   // Получение длительности аудио файла в секундах.
   const onLoadedMetadata = () => {
@@ -33,6 +33,7 @@ const DisplayTrack = (props) => {
         src={currentTrack.audioSrs}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
+        onEnded={handleNext}
       />
 
       {/* Данные аудио файла */}
