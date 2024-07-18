@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-neutral-900 fixed inset-x-0 top-0 z-10">
+      <header className="bg-neutral-900">
         <div className="container mx-auto flex gap-x-16 items-center p-4">
           <div className="edms-logo flex items-center space-x-2">
             <GraphicEqIcon className="text-neutral-50" />

@@ -54,7 +54,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div className="bg-neutral-900 py-4 fixed inset-x-0 bottom-0">
+      <div className="bg-neutral-900 py-4">
         <div className="container mx-auto px-4 flex flex-wrap justify-between">
           <DisplayTrack
             currentTrack={currentTrack}

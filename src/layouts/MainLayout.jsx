@@ -6,13 +6,15 @@ import AudioPlayer from "../components/ui/AudioPlayer/AudioPlayer";
 const MainLayout = () => {
   return (
     <>
-      <div className="flex flex-col justify-between bg-neutral-800 min-h-screen">
+      <div className="flex flex-col justify-between bg-neutral-800 max-h-screen">
         <Header />
-        <div className="container mx-auto px-4 mt-16">
-          <Outlet />
+        <div className="overflow-auto">
+          <div className="container mx-auto px-4">
+            <Outlet />
+          </div>
+          <Footer />
         </div>
         <AudioPlayer />
-        <Footer />
       </div>
     </>
   );
