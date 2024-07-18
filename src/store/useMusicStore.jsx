@@ -7,11 +7,11 @@ import { nanoid } from "nanoid";
 /**
  * Музыкальное хранилище
  * @type {Object} useMusicStore - Главный объект музыкального хранилища
- * @prop {array} useMusicStore.allMusicOfStore - Массив музыкальных композиций
+ * @prop {array} useMusicStore.musicOfStore - Массив музыкальных композиций
  * @prop {function} useMusicStore.addMusicInStore - Функция добавляния нового аудио файла в массив музыкальных композиций
  */
 const useMusicStore = create(() => ({
-  allMusicOfStore: [
+  musicOfStore: [
     {
       idOfTrack: "0",
       imgSrc:
@@ -106,7 +106,7 @@ const useMusicStore = create(() => ({
    * @param {string} nameOfTrack - Название композиции.
    * @param {string} artist - Имена артистов.
    * @param {string} genre - Жанр.
-   * @returns {Array} - Обновленный массив объектов allMusicOfStore.
+   * @returns {Array} - Обновленный массив объектов musicOfStore.
    */
   addMusicInStore:
     (imgSrc, audioSrs, price, nameOfTrack, artist, genre) => (state) => {
@@ -122,7 +122,7 @@ const useMusicStore = create(() => ({
         numberOfSales: 0,
       };
 
-      return { allMusicOfStore: [...state.allMusicOfStore, newTrackForStore] };
+      return { musicOfStore: [...state.musicOfStore, newTrackForStore] };
     },
 }));
 

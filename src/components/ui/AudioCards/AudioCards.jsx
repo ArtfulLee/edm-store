@@ -7,14 +7,14 @@ import useMusicStore from "../../../store/useMusicStore";
  */
 const AudioCards = () => {
   // Получаем всю музыку со стора
-  const allMusicOfStore = useMusicStore((state) => state.allMusicOfStore);
+  const musicOfStore = useMusicStore((state) => state.musicOfStore);
 
   return (
     <>
       <div className="flex justify-between flex-wrap py-4">
         {/* Возвращаем карточки аудио файлов */}
-        {!!allMusicOfStore.length &&
-          allMusicOfStore.map((track) => {
+        {!!musicOfStore.length &&
+          musicOfStore.map((track) => {
             return <AudioCard key={track.idOfTrack} details={track} />;
           })}
       </div>
