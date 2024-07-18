@@ -15,7 +15,7 @@ const AudioCards = () => {
         {/* Возвращаем карточки аудио файлов */}
         {!!musicOfStore.length &&
           musicOfStore.map((track) => {
-            return <AudioCard key={track.idOfTrack} details={track} />;
+            return <AudioCard key={track.idOfTrack} audioDetails={track} />;
           })}
       </div>
     </>
