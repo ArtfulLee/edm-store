@@ -2,6 +2,7 @@
  * Компонент отображения текущей информации об аудио.
  * @param {object} props - Свойства компонента.
  * @param {object} props.audioRef - Референс на текущий объект аудио.
+ * @param {object} props.setDuration - Референс на текущий объект аудио.
  * @param {object} props.currentTrack - Детали карточки.
  * @param {string} props.currentTrack.idOfTrack - Идентификатор карточки.
  * @param {string} props.currentTrack.imgSrc - Путь к изображению.
@@ -16,20 +17,51 @@
  * @returns {JSXElement}
  */
 const DisplayTrack = (props) => {
-  const { currentTrack, audioRef } = props;
+  const { currentTrack, audioRef, setDuration, progressBarRef } = props;
 
-  console.log(currentTrack);
+  // Получение длительности аудио файла в секундах.
+  const onLoadedMetadata = () => {
+    const timeOfAudio = audioRef.current.duration;
+    setDuration(timeOfAudio);
+    progressBarRef.current.max = timeOfAudio;
+  };
 
   return (
     <>
       {/* Текущий трек для воспроизведения. */}
-      <audio src={currentTrack.audioSrs} ref={audioRef} />
+      <audio
+        src={currentTrack.audioSrs}
+        ref={audioRef}
+        onLoadedMetadata={onLoadedMetadata}
+      />
 
       {/* Данные аудио */}
-      <div>
-        <div className="text-neutral-50">{currentTrack.nameOfTrack}</div>
-        <div className="text-neutral-50">{currentTrack.artist}</div>
-        <div className="text-neutral-50">{currentTrack.label}</div>
+      <div className="flex space-x-4">
+        <div className="w-20 h-20 flex justify-center justify-items-center">
+          {currentTrack.imgSrc ? (
+            <img
+              className="block"
+              src={currentTrack.imgSrc}
+              alt="audio-cover"
+            />
+          ) : (
+            /* Дивку надо будет заменить на "компонент заглушку" для отсутсвующих картинок. */
+            <div className="content-center text-center outline outline-1 outline-neutral-400 w-full h-full text-neutral-50 bg-neutral-800">
+              No cover
+            </div>
+          )}
+        </div>
+        <div className="max-w-96">
+          <div className="line-clamp-1 text-neutral-50 text-lg">
+            {currentTrack.nameOfTrack}
+          </div>
+          <div className="line-clamp-1 text-neutral-400">
+            {currentTrack.artist}
+          </div>
+          <div className="line-clamp-1 text-neutral-400">
+            {currentTrack.label}
+          </div>
+        </div>
       </div>
     </>
   );

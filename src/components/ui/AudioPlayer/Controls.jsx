@@ -1,5 +1,5 @@
 // React
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 // Иконки
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -12,7 +12,7 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
  * @returns {JSX.Element} Элемент JSX.
  */
 const Controls = (props) => {
-  const { audioRef } = props;
+  const { audioRef, progressBarRef, duration, setTimeProgress } = props;
 
   // Стейт для управления Play/Pause.
   const [isPlaying, setIsPlaying] = useState(false);
@@ -22,14 +22,31 @@ const Controls = (props) => {
     setIsPlaying((prev) => !prev);
   };
 
+  // Референс для сохранения положения анимации прогрессбара.
+  const playAnimationRef = useRef();
+
+  // Функция для .
+  const repeat = useCallback(() => {
+    const currentTime = audioRef.current.currentTime;
+    setTimeProgress(currentTime);
+    progressBarRef.current.value = currentTime;
+    progressBarRef.current.style.setProperty(
+      "--range-progress",
+      `${(progressBarRef.current.value / duration) * 100}%`
+    );
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [audioRef, duration, progressBarRef, setTimeProgress]);
+
   // Изменение состояния воспроизведения аудио от зависимости изменения стейта для управления Play/Pause или изменения референса на ссылку аудио.
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
+      cancelAnimationFrame(playAnimationRef.current);
     }
-  }, [isPlaying, audioRef]);
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying, audioRef, repeat]);
 
   return (
     <>

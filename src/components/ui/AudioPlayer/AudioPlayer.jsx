@@ -14,23 +14,43 @@ import ProgressBar from "./ProgressBar";
  * @returns {JSX.Element} Элемент JSX.
  */
 const AudioPlayer = () => {
-  // Получаем всю музыку из стора
+  // Получаем всю музыку из стора.
   const allMusicOfStore = useMusicStore((state) => state.allMusicOfStore);
 
-  // Стейт для изменения текущего трека
-  const [currentTrack, setCurrentTrack] = useState(allMusicOfStore[0]);
-
-  // Референс на ссылку аудио
+  // Референс на ссылку аудио.
   const audioRef = useRef();
-  console.log("Текущий объект React DOM <audio>", audioRef);
+  // Референс на входные параметры прогрессбара.
+  const progressBarRef = useRef();
+
+  // Стейт для изменения текущего трека.
+  const [currentTrack, setCurrentTrack] = useState(allMusicOfStore[0]);
+  // Стейт для отслеживания времени прогрессбара.
+  const [timeProgress, setTimeProgress] = useState(0);
+  // Стейт для хранения длительности аудио файла.
+  const [duration, setDuration] = useState(0);
 
   return (
     <>
       <div className="bg-neutral-900 py-4">
-        <div className="flex justify-center space-x-8">
-          <DisplayTrack currentTrack={currentTrack} audioRef={audioRef} />
-          <Controls audioRef={audioRef} />
-          <ProgressBar />
+        <div className="flex flex-wrap justify-center space-x-8">
+          <DisplayTrack
+            currentTrack={currentTrack}
+            audioRef={audioRef}
+            progressBarRef={progressBarRef}
+            setDuration={setDuration}
+          />
+          <ProgressBar
+            audioRef={audioRef}
+            progressBarRef={progressBarRef}
+            timeProgress={timeProgress}
+            duration={duration}
+          />
+          <Controls
+            audioRef={audioRef}
+            progressBarRef={progressBarRef}
+            duration={duration}
+            setTimeProgress={setTimeProgress}
+          />
         </div>
       </div>
     </>
