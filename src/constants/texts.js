@@ -1,7 +1,7 @@
 /**
- * Глобальный объект AUDIO_CARD__TEXTS
+ * Глобальный объект AUDIO__TEXTS
  */
-export const AUDIO_CARD__TEXTS = {
+export const AUDIO__TEXTS = {
   idOfTrack: "Идентификатор карточки",
   imgSrc: "Путь к изображению",
   audioSrs: "Путь к аудио",
@@ -9,6 +9,7 @@ export const AUDIO_CARD__TEXTS = {
   nameOfTrack: "Название композиции",
   artist: "Имена артистов",
   genre: "Жанр",
+  label: "Лейбл",
   isFavorite: "Добавлено в избранные или нет",
   numberOfSales: "Количество продаж",
 };
