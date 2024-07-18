@@ -1,13 +1,13 @@
 /**
- * Компонент отображения текущей информации об аудио.
+ * Компонент отображения текущей информации об аудио файле.
  * @param {object} props - Свойства компонента.
- * @param {object} props.audioRef - Референс на текущий объект аудио.
- * @param {object} props.setDuration - Референс на текущий объект аудио.
+ * @param {object} props.audioRef - Референс на текущий объект аудио файла.
+ * @param {object} props.setDuration - Референс на текущий объект аудио файла.
  * @param {object} props.currentTrack - Детали карточки.
  * @param {string} props.currentTrack.idOfTrack - Идентификатор карточки.
  * @param {string} props.currentTrack.imgSrc - Путь к изображению.
- * @param {string} props.currentTrack.audioSrs - Путь к аудио.
- * @param {string} props.currentTrack.price - Цена аудио.
+ * @param {string} props.currentTrack.audioSrs - Путь к аудио файлу.
+ * @param {string} props.currentTrack.price - Цена аудио файла.
  * @param {string} props.currentTrack.nameOfTrack - Название композиции.
  * @param {string} props.currentTrack.artist - Имена артистов.
  * @param {string} props.currentTrack.genre - Жанр. (WIP)
@@ -28,14 +28,14 @@ const DisplayTrack = (props) => {
 
   return (
     <>
-      {/* Текущий трек для воспроизведения. */}
+      {/* Текущий аудио файл для воспроизведения. */}
       <audio
         src={currentTrack.audioSrs}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
       />
 
-      {/* Данные аудио */}
+      {/* Данные аудио файла */}
       <div className="flex space-x-4">
         <div className="w-20 h-20 flex justify-center justify-items-center">
           {currentTrack.imgSrc ? (

@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
  * Музыкальное хранилище
  * @type {Object} useMusicStore - Главный объект музыкального хранилища
  * @prop {array} useMusicStore.allMusicOfStore - Массив музыкальных композиций
- * @prop {function} useMusicStore.addMusicInStore - Функция добавляния нового трека в массив музыкальных композиций
+ * @prop {function} useMusicStore.addMusicInStore - Функция добавляния нового аудио файла в массив музыкальных композиций
  */
 const useMusicStore = create(() => ({
   allMusicOfStore: [
@@ -99,10 +99,10 @@ const useMusicStore = create(() => ({
   ],
 
   /**
-   * Добавление аудио в стор
+   * Добавление аудио файл в стор
    * @param {string} imgSrc - Путь к изображению.
-   * @param {string} audioSrs - Путь к аудио.
-   * @param {string} price - Цена аудио.
+   * @param {string} audioSrs - Путь к аудио файлу.
+   * @param {string} price - Цена аудио файла.
    * @param {string} nameOfTrack - Название композиции.
    * @param {string} artist - Имена артистов.
    * @param {string} genre - Жанр.

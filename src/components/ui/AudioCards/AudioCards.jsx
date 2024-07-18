@@ -12,7 +12,7 @@ const AudioCards = () => {
   return (
     <>
       <div className="flex justify-between flex-wrap py-4">
-        {/* Возвращаем аудио карточки */}
+        {/* Возвращаем карточки аудио файлов */}
         {!!allMusicOfStore.length &&
           allMusicOfStore.map((track) => {
             return <AudioCard key={track.idOfTrack} details={track} />;

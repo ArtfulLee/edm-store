@@ -4,8 +4,8 @@
 export const AUDIO__TEXTS = {
   idOfTrack: "Идентификатор карточки",
   imgSrc: "Путь к изображению",
-  audioSrs: "Путь к аудио",
-  price: "Цена аудио",
+  audioSrs: "Путь к аудио файлу",
+  price: "Цена аудио файла",
   nameOfTrack: "Название композиции",
   artist: "Имена артистов",
   genre: "Жанр",

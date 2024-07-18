@@ -7,7 +7,7 @@ const Home = () => {
         <h1 className="text-2xl font-bold text-neutral-50">Home Page</h1>
         <p className="text-neutral-50">Welcome to the home page!</p>
       </div>
-      {/* Отображаем аудио карточки. */}
+      {/* Отображаем карточки аудио файлов. */}
       <AudioCards />
     </>
   );
