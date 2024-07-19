@@ -6,7 +6,7 @@ import AudioPlayer from "../components/ui/AudioPlayer/AudioPlayer";
 const MainLayout = () => {
   return (
     <>
-      <div className="flex flex-col justify-between bg-neutral-800 max-h-screen">
+      <div className="font-sans text-base not-italic font-normal tracking-normal flex flex-col justify-between bg-neutral-800 max-h-screen">
         <Header />
         <div className="overflow-auto">
           <div className="container mx-auto px-4">

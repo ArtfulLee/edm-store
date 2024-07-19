@@ -3,12 +3,9 @@
 @tailwind utilities;
 
 :root {
-
-  font-family: Verdana, sans-serif;
-
   /* width */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 0;
   }
 
   /* Track */
@@ -25,4 +22,8 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(163 163 163);
   }
+}
+
+* {
+  outline: 1px solid green;
 }

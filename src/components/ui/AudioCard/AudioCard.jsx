@@ -66,16 +66,14 @@ const AudioCard = (props) => {
             className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-neutral-500"
             onClick={() => onToggleFavorite(audioDetails)}
           >
-            <div>
-              {audioDetails.isFavorite ? (
-                <FavoriteIcon className="text-pink-500" />
-              ) : (
-                <FavoriteIcon />
-              )}
-            </div>
+            {audioDetails.isFavorite ? (
+              <FavoriteIcon fontSize="small" className="text-pink-500" />
+            ) : (
+              <FavoriteIcon fontSize="small" />
+            )}
           </button>
           <button className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-pink-500">
-            <div className="text-lg">{audioDetails.price}</div>
+            <div className="font-semibold">{audioDetails.price}</div>
             <ShoppingCartIcon fontSize="small" />
           </button>
         </div>
