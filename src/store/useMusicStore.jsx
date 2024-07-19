@@ -259,10 +259,20 @@ const useMusicStore = create((set) => ({
    * Получение избранных аудио файлов.
    * @returns {Array} Массив избранных аудио файлов.
    */
-  getFavoriteAudioFiles: () =>
-    set((state) => {
-      return state.musicOfStore?.filter((audioFile) => audioFile?.isFavorite);
-    }),
+  getFavoriteAudioFiles: () => (state) => {
+    return state.musicOfStore?.filter((audioFile) => audioFile?.isFavorite);
+  },
+
+  /**
+    Находит продукт по idOfTrack.
+    @param {string} idOfTrack - id продукта.
+    @returns {Object|null} Возвращает найденный продукт или null.
+    */
+  getAudioFileByIdOfTrack: (idOfTrack) => (state) => {
+    state.musicOfStore.find((audioFile) => {
+      return audioFile.idOfTrack === idOfTrack || null;
+    });
+  },
 }));
 
 export default useMusicStore;

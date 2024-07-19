@@ -4,7 +4,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 // Сторы
-import useMusicStore from "../../../store/useMusicStore";
+/* import useMusicStore from "../../../store/useMusicStore"; */
 
 /**
  * Компонент карточка
@@ -23,14 +23,18 @@ import useMusicStore from "../../../store/useMusicStore";
  */
 const AudioCard = (props) => {
   const audioDetails = props.audioDetails;
+  const { handleFavoriteAndShowAlert } = props;
 
   // Обработчик нажатия кнопку Play/Pause на карточке аудио файла
   const handlePlayOnAudioCard = () => {
     //
   };
 
-  // Стейт для обновления сохраненок
-  const { onToggleFavorite } = useMusicStore();
+  const handleFavorite = (event) => {
+    event.stopPropagation(); // Предотвр. всплытие события
+
+    handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioDetails);
+  };
 
   return (
     <>
@@ -64,7 +68,7 @@ const AudioCard = (props) => {
         <div className="flex justify-end">
           <button
             className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-neutral-500"
-            onClick={() => onToggleFavorite(audioDetails)}
+            onClick={handleFavorite}
           >
             {audioDetails.isFavorite ? (
               <FavoriteIcon fontSize="small" className="text-pink-500" />
