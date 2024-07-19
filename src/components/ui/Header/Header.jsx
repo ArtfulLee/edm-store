@@ -1,5 +1,8 @@
-import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+// React
 import { NavLink, useLocation } from "react-router-dom";
+
+// Иконки
+import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 
 /** Массив пунктов меню */
 const navItems = [
@@ -28,7 +31,7 @@ const Header = () => {
 
   return (
     <>
-      <header className=" bg-neutral-900">
+      <header className="bg-neutral-900">
         <div className="container mx-auto flex gap-x-16 items-center p-4">
           <div className="edms-logo flex items-center space-x-2">
             <GraphicEqIcon className="text-neutral-50" />
@@ -39,13 +42,13 @@ const Header = () => {
               <NavLink
                 to={item?.path}
                 key={item?.path}
-                className={`${isActiveLink(item?.path) ? "text-pink-500" : ""}`}
+                className={`${isActiveLink(item?.path) ? "text-emerald-400" : ""}`}
               >
                 {item?.name}
               </NavLink>
             ))}
           </div>
-          {/* Сюда надо будет добавить авторизацию */}
+          {/* Сюда надо будет добавить авторизацию. */}
         </div>
       </header>
     </>

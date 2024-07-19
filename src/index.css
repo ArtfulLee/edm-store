@@ -3,5 +3,23 @@
 @tailwind utilities;
 
 :root {
-  font-family: Verdana, sans-serif;
+  /* width */
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(212 212 212);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(163 163 163);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(163 163 163);
+  }
 }

@@ -3,7 +3,7 @@ import MainLayout from "../../layouts/MainLayout";
 import Home from "../../pages/Home";
 import Genres from "../../pages/Genres";
 
-/** Массив роутов приложения */
+/** Массив роутов приложения. */
 const routes = [
   { path: "/", element: <Home /> },
   { path: "genres", element: <Genres /> },
@@ -24,7 +24,7 @@ const renderRoutes = (routes) => {
   ));
 };
 
-/** Корневой компонент приложения с роутами */
+/** Корневой компонент приложения с роутами. */
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<MainLayout />}>

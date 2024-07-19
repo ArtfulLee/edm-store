@@ -3,11 +3,10 @@ import AudioCards from "../components/ui/AudioCards/AudioCards";
 const Home = () => {
   return (
     <>
-      <div className="container mx-auto py-4">
-        <h1 className="text-2xl font-bold text-neutral-50">Home Page</h1>
-        <p className="text-neutral-50">Welcome to the home page!</p>
+      <div className="container mx-auto my-4">
+        <h1 className="text-2xl font-bold text-neutral-50">New on EDM Store</h1>
       </div>
-      {/* Отображаем аудио карточки */}
+      {/* Отображаем карточки аудио файлов. */}
       <AudioCards />
     </>
   );
