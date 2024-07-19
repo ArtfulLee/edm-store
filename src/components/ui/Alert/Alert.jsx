@@ -8,7 +8,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import CloseIcon from "@mui/icons-material/Close";
 
-//  Стили для variant
+//  Стили для variant.
 const variantClasses = {
   info: "border-l-4 border-neutral-50 bg-neutral-500 text-neutral-50",
   warning: "border-l-4 border-yellow-400 bg-neutral-500 text-neutral-50",
@@ -17,7 +17,7 @@ const variantClasses = {
   neutral: "border-l-4 border-neutral-400 bg-neutral-500 text-neutral-50",
 };
 
-// Варианты иконок
+// Варианты иконок.
 const defaultIconVariants = {
   info: <InfoIcon className="text-neutral-50" />,
   warning: <WarningIcon className="text-yellow-400" />,
@@ -25,7 +25,7 @@ const defaultIconVariants = {
   error: <ErrorIcon className="text-red-400" />,
 };
 
-// Стили для align
+// Стили для align.
 const alignClasses = {
   "top-left": "top-4 left-4",
   "top-right": "top-4 right-4",
@@ -54,7 +54,7 @@ const Alert = ({
   align = "bottom-left",
   onClose,
 }) => {
-  // Вставка дефолтной или пользовательской иконки
+  // Вставка дефолтной или пользовательской иконки.
   const iconVariant = icon || defaultIconVariants[variant];
 
   useEffect(() => {
