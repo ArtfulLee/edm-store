@@ -264,8 +264,8 @@ const useMusicStore = create((set) => ({
   },
 
   /**
-    Находит продукт по idOfTrack.
-    @param {string} idOfTrack - id продукта.
+    Находит аудио файл по idOfTrack.
+    @param {string} idOfTrack - id аудио файла.
     @returns {Object|null} Возвращает найденный продукт или null.
     */
   getAudioFileByIdOfTrack: (idOfTrack) => (state) => {

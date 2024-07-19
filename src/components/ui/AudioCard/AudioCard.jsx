@@ -3,9 +3,6 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-// Сторы
-/* import useMusicStore from "../../../store/useMusicStore"; */
-
 /**
  * Компонент карточка
  * @param {object} props - Свойства компонента.
@@ -25,13 +22,16 @@ const AudioCard = (props) => {
   const audioDetails = props.audioDetails;
   const { handleFavoriteAndShowAlert } = props;
 
-  // Обработчик нажатия кнопку Play/Pause на карточке аудио файла
+  /* **************************************** */
+  // Обработчик нажатия кнопку Play/Pause на карточке аудио файла.
   const handlePlayOnAudioCard = () => {
-    //
+    // WIP
   };
+  /* **************************************** */
 
   const handleFavorite = (event) => {
-    event.stopPropagation(); // Предотвр. всплытие события
+    // Предотвр. всплытие события.
+    event.stopPropagation();
 
     handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioDetails);
   };
@@ -66,6 +66,7 @@ const AudioCard = (props) => {
           <p className="line-clamp-1 text-neutral-400">{audioDetails.artist}</p>
         </div>
         <div className="flex justify-end">
+          {/* Start Кнопка добавления аудио яайла в избранные. */}
           <button
             className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-neutral-500"
             onClick={handleFavorite}
@@ -76,10 +77,13 @@ const AudioCard = (props) => {
               <FavoriteIcon fontSize="small" />
             )}
           </button>
+          {/* End Кнопка добавления аудио яайла в избранные. */}
+          {/* start Кнопка для покупки аудио файла. */}
           <button className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-pink-500">
             <div className="font-semibold">{audioDetails.price}</div>
             <ShoppingCartIcon fontSize="small" />
           </button>
+          {/* End Кнопка для покупки аудио файла. */}
         </div>
         {/* End Информация по карточке. */}
       </div>

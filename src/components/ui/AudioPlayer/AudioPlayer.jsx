@@ -10,7 +10,7 @@ import Controls from "./Controls";
 import ProgressBar from "./ProgressBar";
 
 /**
- * Компонент Аудио плеер
+ * Компонент Аудио плеер.
  * @returns {JSX.Element} Элемент JSX.
  */
 const AudioPlayer = () => {
