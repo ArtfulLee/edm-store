@@ -1,6 +1,10 @@
-import { useState } from "react";
+//Иконки
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import PauseIcon from "@mui/icons-material/Pause";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
+// Сторы
+import useMusicStore from "../../../store/useMusicStore";
 
 /**
  * Компонент карточка
@@ -18,19 +22,26 @@ import PauseIcon from "@mui/icons-material/Pause";
  * @returns {JSX.Element} Элемент JSX.
  */
 const AudioCard = (props) => {
-  const audioDetails = props.audioDetails
+  const audioDetails = props.audioDetails;
 
   // Обработчик нажатия кнопку Play/Pause на карточке аудио файла
   const handlePlayOnAudioCard = () => {
     //
   };
 
+  // Стейт для обновления сохраненок
+  const { onToggleFavorite } = useMusicStore();
+
   return (
     <>
       <div className="bg-neutral-700 max-w-60 p-2 mb-4">
         {/* Start Обложка аудио файла + элементы управления. */}
         <div className="group relative">
-          <img className="w-full block" src={audioDetails.imgSrc} alt="audio-cover" />
+          <img
+            className="w-full block"
+            src={audioDetails.imgSrc}
+            alt="audio-cover"
+          />
           <div className="text-3xl absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
             {/* Start кнопка Play. */}
             <button
@@ -44,12 +55,29 @@ const AudioCard = (props) => {
         </div>
         {/* End Обложка аудио файла + элементы управления. */}
         {/* Start Информация по карточке. */}
-        <div className="pt-2">
-          <p className="line-clamp-1 text-neutral-50 text-lg">{audioDetails.nameOfTrack}</p>
+        <div className="py-2">
+          <p className="line-clamp-1 text-neutral-50 text-lg">
+            {audioDetails.nameOfTrack}
+          </p>
           <p className="line-clamp-1 text-neutral-400">{audioDetails.artist}</p>
-          <div>
-            <button className="line-clamp-1 text-neutral-400">{audioDetails.price}</button>
-          </div>
+        </div>
+        <div className="flex justify-end">
+          <button
+            className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-neutral-500"
+            onClick={() => onToggleFavorite(audioDetails)}
+          >
+            <div>
+              {audioDetails.isFavorite ? (
+                <FavoriteIcon className="text-pink-500" />
+              ) : (
+                <FavoriteIcon />
+              )}
+            </div>
+          </button>
+          <button className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-pink-500">
+            <div className="text-lg">{audioDetails.price}</div>
+            <ShoppingCartIcon fontSize="small" />
+          </button>
         </div>
         {/* End Информация по карточке. */}
       </div>

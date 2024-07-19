@@ -1,5 +1,8 @@
-import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+// React
 import { NavLink, useLocation } from "react-router-dom";
+
+// Иконки
+import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 
 /** Массив пунктов меню */
 const navItems = [
