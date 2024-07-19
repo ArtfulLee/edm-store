@@ -23,7 +23,7 @@ const AudioPlayer = () => {
   const progressBarRef = useRef();
 
   // Стейт для сохранения текущего индекса аудио файла.
-  const [trackIndex, setTrackIndex] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(musicOfStore.length - 1);
   // Стейт для изменения текущего аудио файла.
   const [currentTrack, setCurrentTrack] = useState(musicOfStore[trackIndex]);
   // Стейт для отслеживания времени прогрессбара.
@@ -32,7 +32,17 @@ const AudioPlayer = () => {
   const [duration, setDuration] = useState(0);
 
   // Обработчики для управления переключением между аудио файлами.
+  // Т.к. массив аудио файлов в обратном порядке, то код по кнопкам Previous/Next поменял местами.
   const handlePrevious = () => {
+    if (trackIndex >= musicOfStore.length - 1) {
+      setTrackIndex(0);
+      setCurrentTrack(musicOfStore[0]);
+    } else {
+      setTrackIndex((prev) => prev + 1);
+      setCurrentTrack(musicOfStore[trackIndex + 1]);
+    }
+  };
+  const handleNext = () => {
     if (trackIndex === 0) {
       let lastTrackIndex = musicOfStore.length - 1;
       setTrackIndex(lastTrackIndex);
@@ -40,15 +50,6 @@ const AudioPlayer = () => {
     } else {
       setTrackIndex((prev) => prev - 1);
       setCurrentTrack(musicOfStore[trackIndex - 1]);
-    }
-  };
-  const handleNext = () => {
-    if (trackIndex >= musicOfStore.length - 1) {
-      setTrackIndex(0);
-      setCurrentTrack(musicOfStore[0]);
-    } else {
-      setTrackIndex((prev) => prev + 1);
-      setCurrentTrack(musicOfStore[trackIndex + 1]);
     }
   };
 
