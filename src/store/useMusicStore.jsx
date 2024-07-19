@@ -96,6 +96,90 @@ const useMusicStore = create(() => ({
       isFavorite: false,
       numberOfSales: 0,
     },
+    {
+      idOfTrack: "6",
+      imgSrc:
+        "https://geo-media.beatport.com/image_size/1400x1400/48339034-bdd3-4a16-93c7-767979f8e390.jpg",
+      audioSrs:
+        "https://geo-samples.beatport.com/track/3db6259b-d3ac-4cdf-871b-beb6131a4c2a.LOFI.mp3",
+      price: "3$",
+      nameOfTrack: "Money Talks",
+      artist: "FM-3",
+      genre: "Breaks",
+      label: "Banana Club",
+      isFavorite: false,
+      numberOfSales: 0,
+    },
+    {
+      idOfTrack: "7",
+      imgSrc:
+        "https://geo-media.beatport.com/image_size/1400x1400/b7712e5e-7955-4391-a014-766d1ca98faf.jpg",
+      audioSrs:
+        "https://geo-samples.beatport.com/track/5075e616-4cc6-407d-ad4f-d8d7ad3df3ac.LOFI.mp3",
+      price: "3$",
+      nameOfTrack: "Evil Side",
+      artist: "MIAU",
+      genre: "Breaks",
+      label: "Gigabeat Records",
+      isFavorite: false,
+      numberOfSales: 0,
+    },
+    {
+      idOfTrack: "8",
+      imgSrc:
+        "https://geo-media.beatport.com/image_size/1400x1400/698f2f1d-1845-4381-92af-e20b1f3eb2aa.jpg",
+      audioSrs:
+        "https://geo-samples.beatport.com/track/ca26687a-3c81-4714-8ab9-e93dd8ccef0b.LOFI.mp3",
+      price: "3$",
+      nameOfTrack: "Obstacles",
+      artist: "Basstyler, MIAU",
+      genre: "Breaks",
+      label: "SPACE PIZZA Records",
+      isFavorite: false,
+      numberOfSales: 0,
+    },
+    {
+      idOfTrack: "9",
+      imgSrc:
+        "https://geo-media.beatport.com/image_size/1400x1400/677a6489-5945-4b57-ac31-a7a5250c3f8f.jpg",
+      audioSrs:
+        "https://geo-samples.beatport.com/track/6f43c8a6-2937-47cc-a615-aa0153fafad1.LOFI.mp3",
+      price: "3$",
+      nameOfTrack: "No Coming Back",
+      artist: "Keith Mackenzie",
+      genre: "Breaks",
+      label: "83",
+      isFavorite: false,
+      numberOfSales: 0,
+    },
+    {
+      idOfTrack: "10",
+      imgSrc:
+        "https://geo-media.beatport.com/image_size/1400x1400/390ee8db-25cb-405b-86fc-db11f112335b.jpg",
+      audioSrs:
+        "https://geo-samples.beatport.com/track/72956d93-8c30-4458-aaae-981cb51ddaa8.LOFI.mp3",
+      price: "3$",
+      nameOfTrack: "Gym Workout",
+      artist: "Obscene Frequenzy",
+      genre: "Breaks",
+      label: "Wasted",
+      isFavorite: false,
+      numberOfSales: 0,
+    },
+    {
+      idOfTrack: "11",
+      imgSrc:
+        "https://geo-media.beatport.com/image_size/1400x1400/dd95a8f3-5a9c-40a1-a803-ef4036f2406a.jpg",
+      audioSrs:
+        "https://geo-samples.beatport.com/track/34b9e340-86b0-4b20-9252-afb193e602db.LOFI.mp3",
+      price: "3$",
+      nameOfTrack: "Got A Feelin'",
+      artist: "Keith Mackenzie, Miggy",
+      genre: "Breaks",
+      label: "Play Me Records",
+      isFavorite: false,
+      numberOfSales: 0,
+    },
   ],
 
   /**
