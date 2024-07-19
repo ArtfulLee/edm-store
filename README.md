@@ -1,3 +1,3 @@
 # EDM Store
 
-Electronic Dance Music
+Electronic Dance Music Store (WIP)
