@@ -38,7 +38,7 @@ const AudioCard = (props) => {
 
   return (
     <>
-      <div className="bg-neutral-700 max-w-60 p-2 mb-4">
+      <div className="bg-neutral-700 sm:max-w-full md:max-w-60  p-2 mb-4">
         {/* Start Обложка аудио файла + элементы управления. */}
         <div className="group relative">
           <img

@@ -22,6 +22,7 @@ const Controls = (props) => {
     handlePrevious,
     handleNext,
     setTimeProgress,
+    onLoadedMetadata,
   } = props;
 
   // Стейт для управления Play/Pause.
@@ -61,8 +62,9 @@ const Controls = (props) => {
       audioRef.current.pause();
       cancelAnimationFrame(playAnimationRef.current);
     }
+    onLoadedMetadata();
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [isPlaying, audioRef, repeat]);
+  }, [isPlaying, audioRef, onLoadedMetadata, repeat]);
 
   // Изменение уровня громкости аудиофайла от изменений зависимостей "значения уровня громкости стейта изменения уровня громкости" или "референса на аудио файл".
   useEffect(() => {

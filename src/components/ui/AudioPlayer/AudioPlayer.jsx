@@ -31,6 +31,15 @@ const AudioPlayer = () => {
   // Стейт для хранения длительности аудио файла.
   const [duration, setDuration] = useState(0);
 
+  // Получение длительности аудио файла в секундах.
+  const onLoadedMetadata = () => {
+    const timeOfAudio = audioRef.current.duration;
+    // Устанавливаем длительность аудио файла
+    setDuration(timeOfAudio);
+    // Записываем значение "timeOfAudio" в атрибут "max" компонента progressBarRef
+    progressBarRef.current.max = timeOfAudio;
+  };
+
   // Обработчики для управления переключением между аудио файлами.
   // Т.к. массив аудио файлов в обратном порядке, то код по кнопкам Previous/Next поменял местами.
   const handlePrevious = () => {
@@ -44,9 +53,9 @@ const AudioPlayer = () => {
   };
   const handleNext = () => {
     if (trackIndex === 0) {
-      let lastTrackIndex = musicOfStore.length - 1;
-      setTrackIndex(lastTrackIndex);
-      setCurrentTrack(musicOfStore[lastTrackIndex]);
+      let NextTrackIndex = musicOfStore.length - 1;
+      setTrackIndex(NextTrackIndex);
+      setCurrentTrack(musicOfStore[NextTrackIndex]);
     } else {
       setTrackIndex((prev) => prev - 1);
       setCurrentTrack(musicOfStore[trackIndex - 1]);
@@ -63,6 +72,7 @@ const AudioPlayer = () => {
             progressBarRef={progressBarRef}
             setDuration={setDuration}
             handleNext={handleNext}
+            onLoadedMetadata={onLoadedMetadata}
           />
           <ProgressBar
             audioRef={audioRef}
@@ -77,6 +87,7 @@ const AudioPlayer = () => {
             setTimeProgress={setTimeProgress}
             handlePrevious={handlePrevious}
             handleNext={handleNext}
+            onLoadedMetadata={onLoadedMetadata}
           />
         </div>
       </div>
