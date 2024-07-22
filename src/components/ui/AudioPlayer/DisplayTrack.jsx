@@ -19,17 +19,7 @@
  * @returns {JSXElement}
  */
 const DisplayTrack = (props) => {
-  const { currentTrack, audioRef, setDuration, progressBarRef, handleNext } =
-    props;
-
-  // Получение длительности аудио файла в секундах.
-  const onLoadedMetadata = () => {
-    const timeOfAudio = audioRef.current.duration;
-    // Устанавливаем длительность аудио файла
-    setDuration(timeOfAudio);
-    // Записываем значение "timeOfAudio" в атрибут "max" компонента progressBarRef
-    progressBarRef.current.max = timeOfAudio;
-  };
+  const { currentTrack, audioRef, handleNext, onLoadedMetadata } = props;
 
   return (
     <>
