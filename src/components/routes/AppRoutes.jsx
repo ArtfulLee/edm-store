@@ -1,15 +1,27 @@
+// react
 import { Routes, Route } from "react-router-dom";
+
+// routes
+import PrivateRoute from "./PrivateRoute";
+
+// components
 import MainLayout from "../../layouts/MainLayout";
 import Home from "../../pages/Home";
 import Favorites from "../../pages/Favorites";
+import Admin from "../../pages/Admin";
 
 /** Массив роутов приложения. */
 const routes = [
   { path: "/", element: <Home /> },
   { path: "favorites", element: <Favorites /> },
+  {
+    path: "admin",
+    element: <PrivateRoute element={<Admin />} requiredRole="admin" />,
+  },
 ];
 
-/*{ path: "audio-card/:id", element: <AudioCard /> }, */
+/* Добавить страницу с карточкой аудио файла.
+{ path: "audio-card/:id", element: <AudioCard /> }, */
 
 /**
  * Рекурсивно отображает роуты и дочерние роуты.
