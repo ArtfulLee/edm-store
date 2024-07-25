@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import AudioCard from "../AudioCard/AudioCard";
@@ -13,16 +13,21 @@ import useMusicStore from "../../../store/useMusicStore";
  * @returns {JSX.Element} Элемент JSX.
  */
 const AudioCards = () => {
-  // Достаем из стора:
-  // musicOfStore - Всю музыку со стора.
-  // getAudioFileByIdOfTrack - Функцию по получению аудио по IdOfTrack
-  // onToggleFavorite - Функция переключение состояния isFavorite по idOfTrack карточки аудио файла.
-  const { musicOfStore, getAudioFileByIdOfTrack, onToggleFavorite } =
-    useMusicStore((state) => ({
-      musicOfStore: state.musicOfStore,
-      getAudioFileByIdOfTrack: state.getAudioFileByIdOfTrack,
-      onToggleFavorite: state.onToggleFavorite,
-    }));
+  const {
+    musicOfStore,
+    fetchMusicFromDB,
+    getAudioFileByIdOfTrack,
+    onToggleFavorite,
+  } = useMusicStore((state) => ({
+    musicOfStore: state.musicOfStore,
+    fetchMusicFromDB: state.fetchMusicFromDB,
+    getAudioFileByIdOfTrack: state.getAudioFileByIdOfTrack,
+    onToggleFavorite: state.onToggleFavorite,
+  }));
+
+  useEffect(() => {
+    fetchMusicFromDB();
+  }, [fetchMusicFromDB]);
 
   // Стейт скрытия/показа и передачи сообщения в Alert.
   const [alertState, setAlertState] = useState({
@@ -71,7 +76,7 @@ const AudioCards = () => {
               .reverse()}
         </div>
       </section>
-      
+
       <Alert
         title={alertState?.title}
         subtitle={alertState?.message}
