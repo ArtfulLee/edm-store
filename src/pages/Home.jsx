@@ -1,3 +1,5 @@
+// components
+import Form from "../components/ui/Form/Form";
 import AudioCards from "../components/ui/AudioCards/AudioCards";
 
 const Home = () => {
@@ -8,6 +10,7 @@ const Home = () => {
       </div>
       {/* Отображаем карточки аудио файлов. */}
       <AudioCards />
+      <Form />
     </>
   );
 };
