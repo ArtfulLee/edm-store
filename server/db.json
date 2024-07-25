@@ -151,6 +151,8 @@
       "userRole": "admin",
       "firstName": "Alex",
       "lastName": "Step",
+      "login": "AlexStep",
+      "email": "alexstep@edm-store.com",
       "password": "321321321",
       "favoritesAudio": ["11", "9"],
       "boughtAudioFiles": ["0", "5"]
@@ -160,6 +162,8 @@
       "userRole": "user",
       "firstName": "Artful",
       "lastName": "Lee",
+      "login": "ArtfulLee",
+      "email": "artfullee@edm-store.com",
       "password": "321321321",
       "favoritesAudio": ["10", "8"],
       "boughtAudioFiles": ["1", "3"]
