@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../../layouts/MainLayout";
 import Home from "../../pages/Home";
-import Genres from "../../pages/Genres";
+import Favorites from "../../pages/Favorites";
 
 /** Массив роутов приложения. */
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "genres", element: <Genres /> },
+  { path: "favorites", element: <Favorites /> },
 ];
 
 /*{ path: "audio-card/:id", element: <AudioCard /> }, */

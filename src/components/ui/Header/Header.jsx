@@ -7,7 +7,7 @@ import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 /** Массив пунктов меню */
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "Genres", path: "/genres" },
+  { name: "Favorites", path: "/favorites" },
 ];
 
 /**
