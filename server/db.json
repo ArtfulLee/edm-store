@@ -144,5 +144,25 @@
       "isFavorite": true,
       "numberOfSales": 0
     }
+  ],
+  "users": [
+    {
+      "userId": "01",
+      "userRole": "admin",
+      "firstName": "Alex",
+      "lastName": "Step",
+      "password": "321321321",
+      "favoritesAudio": ["11", "9"],
+      "boughtAudioFiles": ["0", "5"]
+    },
+    {
+      "userId": "02",
+      "userRole": "user",
+      "firstName": "Artful",
+      "lastName": "Lee",
+      "password": "321321321",
+      "favoritesAudio": ["10", "8"],
+      "boughtAudioFiles": ["1", "3"]
+    }
   ]
 }
