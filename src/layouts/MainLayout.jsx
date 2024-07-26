@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/ui/Header/Header";
 import Footer from "../components/ui/Footer/Footer";
-import AudioPlayer from "../components/ui/AudioPlayer/AudioPlayer";
+import AudioPlayer from "../components/AudioPlayer/AudioPlayer";
 import useMusicStore from "../store/useMusicStore";
 
 const MainLayout = () => {
