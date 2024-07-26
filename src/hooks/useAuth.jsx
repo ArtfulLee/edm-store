@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 // constants
 import { SERVER_CONSTANTS } from "../../server/serverConstants";
+import { ERROR_TEXTS } from "../constants/errorTexts";
 
 /**
  * Контекст для управления состоянием  аутентификации пользователя.
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Проверка аутентификации при загрузке страницы.
-    const userFromLocalStorage = localStorage.getItem("userEDM");
+    const userFromLocalStorage = localStorage.getItem("user");
 
     // Установка пользователя в состояние (если проверка пройдена).
     userFromLocalStorage && setUser(JSON.parse(userFromLocalStorage));
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 
       if (!response.ok) {
         throw new Error(
-          `Ошибка при запросе на сервер  ${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.users}`
+          `${ERROR_TEXTS.errorFetch}  ${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.users}`
         );
       }
 
@@ -58,6 +59,8 @@ export const AuthProvider = ({ children }) => {
       const newUser = {
         ...userData,
         role: adminExists ? "user" : "admin",
+        favoritesAudio: null,
+        boughtAudioFiles: null,
       };
 
       // Отправка запроса на создание нового пользователя.
@@ -80,9 +83,9 @@ export const AuthProvider = ({ children }) => {
 
       onLogin(createdUser); // Выполняем вход после регистрации?
 
-      localStorage.setItem("userEDM", JSON.stringify(createdUser));
+      localStorage.setItem("user", JSON.stringify(createdUser));
     } catch (error) {
-      console.error("Ошибка при регистрации пользователя:", error);
+      console.error(`${ERROR_TEXTS.errorSingUpNewUser}`, error);
     }
   };
 
@@ -126,7 +129,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("user", JSON.stringify(user));
       } else {
         // Пользователь не найден или данные неверны.
-        console.error("Неверное имя пользователя или пароль");
+        console.error(`${ERROR_TEXTS.errorDataAuth}`);
         // Можно добавить логику для отображения ошибки пользователю.
       }
     } catch (error) {
@@ -141,7 +144,7 @@ export const AuthProvider = ({ children }) => {
   const onLogout = () => {
     setUser(null);
 
-    localStorage.removeItem("userEDM");
+    localStorage.removeItem("user");
   };
 
   const contextValue = { user, onRegister, onLogin, onLogout };
