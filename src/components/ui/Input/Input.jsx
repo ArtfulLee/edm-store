@@ -44,7 +44,7 @@ const Input = ({
 }) => {
   /* На крайний случай оставим пока */
   // const inputClasses = classNames(
-  //   "max-w-96 w-full border border-gray-300 p-2 rounded-md focus:outline-none mb-1",
+  //   "w-full border border-neutral-400 p-2 focus:outline-none",
   //   disabled ? "opacity-50 cursor-not-allowed" : "",
   //   required && error ? "border-rose-500" : "",
   //   className || ""
@@ -52,9 +52,9 @@ const Input = ({
   /* На крайний случай оставим пока */
 
   const inputClasses = cn(
-    "max-w-96 w-full border border-gray-300 p-2 focus:outline-none mb-1",
+    "w-full border border-neutral-400 p-2 focus:outline-none",
     disabled ? "opacity-50 cursor-not-allowed" : "",
-    required && error ? "border-rose-500" : "",
+    required && error ? "border-red-400" : "",
     className || ""
   );
 
@@ -110,9 +110,9 @@ const Input = ({
 
   return (
     <div className="mb-4">
-      <label className="block text-gray-600 text-sm mb-1" htmlFor={name}>
+      <label className="block text-neutral-50" htmlFor={name}>
         {label}
-        {required && !isUserTyping && <span className="text-rose-500">*</span>}
+        {required && !isUserTyping && <span className="text-red-400">*</span>}
       </label>
       <input
         type={type || "text"}
@@ -130,7 +130,7 @@ const Input = ({
         onFocus={handleFocus}
         className={inputClasses}
       />
-      {error && <span className="text-rose-500 text-sm">{error}</span>}
+      {error && <span className="text-rose-400 text-sm">{error}</span>}
     </div>
   );
 };
