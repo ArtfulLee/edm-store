@@ -2,7 +2,7 @@
 import { useState, useRef } from "react";
 
 // Сторы
-import useMusicStore from "../../../store/useMusicStore";
+import useMusicStore from "../../store/useMusicStore";
 
 // Компоненты
 import DisplayTrack from "./DisplayTrack";
