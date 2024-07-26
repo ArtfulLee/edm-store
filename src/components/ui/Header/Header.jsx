@@ -8,8 +8,12 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Modal } from "../../Modal/Modal";
 import Input from "../Input/Input";
 
-// Иконки
+// constants
+import { PLACEHOLDERS } from "../../../constants/placeholders";
+
+// icons
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 /** Массив пунктов меню */
 const navItems = [
@@ -23,13 +27,13 @@ const navItems = [
  * @returns {JSX.Element} Элемент header.
  */
 const Header = () => {
-  // Стейт для показа/скрытия модального окна (для регистрации).
+  // Стейт для показа/скрытия модального окна регистрации.
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-  // Стейт для показа/скрытия модального окна (для входа).
+  // Стейт для показа/скрытия модального окна авторизации.
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Использование кастомного хука для обработки данных
+  // Использование кастомного хука для обработки данных при авторизации.
   const { formValues, formErrors, handleInput, resetForm } = useForm({
     login: "",
     password: "",
@@ -62,28 +66,30 @@ const Header = () => {
   };
 
   // Обработка формы при регистрации
-  const handleRegisterForm = (event) => {
-    event.preventDefault();
-
+  const handleRegisterForm = () => {
     onRegister(formValues);
 
-    setShowRegisterModal(false); // Закрываем Modal
+    // Закрываем Modal
+    setShowRegisterModal(false);
 
-    resetForm(); // Сбрасываем форму
+    // Сбрасываем форму
+    resetForm();
   };
 
   // Обработка формы при входе в систему
   const handleLoginForm = () => {
     onLogin(formValues);
 
-    setShowLoginModal(false); // Закрываем Modal
+    // Закрываем Modal
+    setShowLoginModal(false);
 
-    resetForm(); // Сбрасываем форму
+    // Сбрасываем форму
+    resetForm();
   };
 
   // Обработчик закрытия модального окна (логин)
   const closeLoginModalAndResetForm = () => {
-    setShowRegisterModal(false);
+    setShowLoginModal(false);
     resetForm(); // Сбрасываем форму
   };
 
@@ -96,137 +102,39 @@ const Header = () => {
   return (
     <>
       <header className="bg-neutral-900">
-        <div className="container mx-auto flex gap-x-16 items-center p-4">
-          <div className="edms-logo flex items-center space-x-2">
-            <GraphicEqIcon className="text-neutral-50" />
-            <div className="text-neutral-50 font-bold text-lg">EDM STORE</div>
+        <div className="container mx-auto flex justify-between p-4">
+          <div className="flex gap-x-16 items-center">
+            <div className="edms-logo flex items-center space-x-2">
+              <GraphicEqIcon className="text-neutral-50" />
+              <div className="text-neutral-50 font-bold text-lg">EDM STORE</div>
+            </div>
+
+            <nav className="flex text-neutral-50 space-x-8">
+              {navItems.map((item) => {
+                // Скрыть пункт меню "Admin" если пользователь не администратор
+                if (
+                  item?.name === "Admin" &&
+                  (!user || user?.role !== "admin")
+                ) {
+                  return null;
+                }
+
+                return (
+                  <NavLink
+                    to={item?.path}
+                    key={item?.path}
+                    className={`${
+                      isActiveLink(item?.path) ? "text-emerald-400" : ""
+                    } hover:text-emerald-400`}
+                  >
+                    {item?.name}
+                  </NavLink>
+                );
+              })}
+            </nav>
           </div>
 
-          <nav className="flex text-neutral-50 space-x-8">
-            {navItems.map((item) => {
-              // Скрыть пункт меню "Admin" если пользователь не администратор
-              if (item?.name === "Admin" && (!user || user?.role !== "admin")) {
-                return null;
-              }
-
-              return (
-                <NavLink
-                  to={item?.path}
-                  key={item?.path}
-                  className={`${
-                    isActiveLink(item?.path) ? "text-emerald-400" : ""
-                  }`}
-                >
-                  {item?.name}
-                </NavLink>
-              );
-            })}
-          </nav>
-
-          {/* Сюда надо будет добавить авторизацию. */}
-          <div id="buttons-wrapper" className="inline-flex items-center">
-            {!user ? (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setShowLoginModal(true)}
-                  className="border-2 text-indigo-500 border-indigo-500 font-medium py-2 px-4 rounded"
-                >
-                  Login
-                </button>
-                <button
-                  type="button"
-                  className="ml-3 border-2 border-indigo-500 bg-indigo-500 text-white font-medium py-2 px-4 rounded"
-                  onClick={() => setShowRegisterModal(true)}
-                >
-                  Register
-                </button>
-              </>
-            ) : (
-              <button
-                type="button"
-                className="ml-3 border-2 border-indigo-500 bg-indigo-500 text-white font-medium py-2 px-4 rounded"
-                onClick={onLogout}
-              >
-                Logout
-              </button>
-            )}
-          </div>
-          {showRegisterModal && (
-            <Modal
-              title="Registration form"
-              isOpen={showRegisterModal}
-              onClose={closeRegisterModalAndResetForm}
-            >
-              <form onSubmit={handleRegisterForm}>
-                <Input
-                  label="Login"
-                  name="login"
-                  type="text"
-                  value={formValues?.login}
-                  onInput={handleInput}
-                  placeholder="Enter your login"
-                  error={formErrors?.login}
-                  required
-                />
-                <Input
-                  label="Password"
-                  type="password"
-                  name="password"
-                  value={formValues?.password}
-                  onInput={handleInput}
-                  placeholder="Enter your password"
-                  error={formErrors?.password}
-                  required
-                />
-
-                <button
-                  className="bg-indigo-500 text-white font-medium py-2 px-4 rounded"
-                  type="submit"
-                >
-                  Submit data
-                </button>
-              </form>
-            </Modal>
-          )}
-          {showLoginModal && (
-            <Modal
-              title="Login form"
-              isOpen={showLoginModal}
-              onClose={closeLoginModalAndResetForm}
-            >
-              <form onSubmit={handleLoginForm}>
-                <Input
-                  label="Login"
-                  name="login"
-                  type="text"
-                  value={formValues?.login}
-                  onInput={handleInput}
-                  placeholder="Enter your login"
-                  error={formErrors?.login}
-                  required
-                />
-                <Input
-                  label="Password"
-                  type="password"
-                  name="password"
-                  value={formValues?.password}
-                  onInput={handleInput}
-                  placeholder="Enter your password"
-                  error={formErrors?.password}
-                  required
-                />
-
-                <button
-                  className="bg-indigo-500 text-white font-medium py-2 px-4 rounded"
-                  type="submit"
-                >
-                  Submit data
-                </button>
-              </form>
-            </Modal>
-          )}
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="flex gap-x-16 items-center">
             {/* <button
               type="button"
               onClick={handleToOpenFavorites}
@@ -253,19 +161,145 @@ const Header = () => {
             </button> */}
             <button
               type="button"
-              className="bg-transparent p-1 rounded-full text-gray-400 hover:text-gray-500"
+              className="bg-transparent text-neutral-50  hover:text-emerald-400"
             >
-              <svg
-                fill="currentColor"
-                width="24"
-                height="24"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
-              >
-                <path d="M17 24H21V28H17zM24 24H28V28H24zM17 17H21V21H17zM24 17H28V21H24z"></path>
-                <path d="M28,11h-6V7c0-1.7-1.3-3-3-3h-6c-1.7,0-3,1.3-3,3v4H4c-0.6,0-1,0.4-1,1c0,0.1,0,0.1,0,0.2l1.9,12.1c0.1,1,1,1.7,2,1.7H15v-2	H6.9L5.2,13H28V11z M12,7c0-0.6,0.4-1,1-1h6c0.6,0,1,0.4,1,1v4h-8V7z"></path>
-              </svg>
+              <ShoppingCartIcon />
             </button>
+
+            {/* Start Authorization. */}
+            <div id="buttons-wrapper" className="inline-flex items-center">
+              {!user ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setShowLoginModal(true)}
+                    className="border-2 border-emerald-400 text-emerald-400 font-semibold p-1"
+                  >
+                    Sing In
+                  </button>
+                  <button
+                    type="button"
+                    className="border-2 border-emerald-400 bg-emerald-400 text-neutral-900 font-semibold p-1"
+                    onClick={() => setShowRegisterModal(true)}
+                  >
+                    Sing Up
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="border-2 border-emerald-400 bg-emerald-400 text-neutral-900 font-semibold p-1"
+                  onClick={onLogout}
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+            {showRegisterModal && (
+              <Modal
+                title="Join EDM Store for free"
+                isOpen={showRegisterModal}
+                onClose={closeRegisterModalAndResetForm}
+              >
+                <form onSubmit={handleRegisterForm}>
+                  <Input
+                    label="firstName"
+                    name="firstName"
+                    type="text"
+                    value={formValues?.firstName}
+                    onInput={handleInput}
+                    error={formErrors?.firstName}
+                    placeholder={PLACEHOLDERS.firstName}
+                    required
+                  />
+                  <Input
+                    label="lastName"
+                    name="lastName"
+                    type="text"
+                    value={formValues?.lastName}
+                    onInput={handleInput}
+                    error={formErrors?.lastName}
+                    placeholder={PLACEHOLDERS.lastName}
+                    required
+                  />
+                  <Input
+                    label="login"
+                    name="login"
+                    type="text"
+                    value={formValues?.login}
+                    onInput={handleInput}
+                    error={formErrors?.login}
+                    placeholder={PLACEHOLDERS.login}
+                    required
+                  />
+                  <Input
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={formValues?.email}
+                    onInput={handleInput}
+                    error={formErrors?.email}
+                    placeholder={PLACEHOLDERS.email}
+                    required
+                  />
+                  <Input
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={formValues?.password}
+                    onInput={handleInput}
+                    error={formErrors?.password}
+                    placeholder={PLACEHOLDERS.password}
+                    required
+                  />
+
+                  <button
+                    className="bg-emerald-400 text-neutral-900 font-semibold p-2"
+                    type="submit"
+                  >
+                    Sing Up
+                  </button>
+                </form>
+              </Modal>
+            )}
+            {showLoginModal && (
+              <Modal
+                title="Welcome to EDM Store"
+                isOpen={showLoginModal}
+                onClose={closeLoginModalAndResetForm}
+              >
+                <form onSubmit={handleLoginForm}>
+                  <Input
+                    label="Login"
+                    name="login"
+                    type="text"
+                    value={formValues?.login}
+                    onInput={handleInput}
+                    error={formErrors?.login}
+                    placeholder={PLACEHOLDERS.login}
+                    required
+                  />
+                  <Input
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={formValues?.password}
+                    onInput={handleInput}
+                    error={formErrors?.password}
+                    placeholder={PLACEHOLDERS.password}
+                    required
+                  />
+
+                  <button
+                    className="bg-emerald-400 text-neutral-900 font-semibold p-2"
+                    type="submit"
+                  >
+                    Sing in
+                  </button>
+                </form>
+              </Modal>
+            )}
+            {/* End Authorization. */}
           </div>
         </div>
       </header>
