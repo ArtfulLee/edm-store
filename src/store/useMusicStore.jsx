@@ -15,9 +15,9 @@ import { nanoid } from "nanoid";
  * @prop {string} useMusicStore.error - текст ошибки запроса.
  * @prop {function} useMusicStore.fetchMusicFromDB - запрос на получение аудио файлов для "useMusicStore.musicOfStore" с сервера db.json.
  * @prop {function} useMusicStore.addMusicInStore - Функция добавляния нового аудио файла в музыкальных композиций на сервер db.json.
- * @prop {function} useMusicStore.onToggleFavorite - Переключение состояния isFavorite по idOfTrack карточки аудио файла.
+ * @prop {function} useMusicStore.onToggleFavorite - Переключение состояния isFavorite по id карточки аудио файла.
  * @prop {function} useMusicStore.getFavoriteAudioFiles - Функция для получения избранных аудио файлов пользователя.
- * @prop {function} useMusicStore.getAudioFileByIdOfTrack - Функция для получения аудио файла по idOfTrack.
+ * @prop {function} useMusicStore.getAudioFileByIdOfTrack - Функция для получения аудио файла по id.
  */
 const useMusicStore = create((set) => ({
   musicOfStore: [],
@@ -29,7 +29,6 @@ const useMusicStore = create((set) => ({
         `${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.musicOfStore}`
       );
 
-      console.log(response);
       if (!response.ok)
         throw new Error(
           `${ERROR_TEXTS.errorFetch} ${SERVER_CONSTANTS.server.musicOfStore}`
@@ -66,7 +65,7 @@ const useMusicStore = create((set) => ({
   ) =>
     set((state) => {
       const newTrackForStore = {
-        idOfTrack: nanoid(),
+        id: nanoid(),
         imgSrc,
         audioSrs,
         price,
@@ -82,9 +81,9 @@ const useMusicStore = create((set) => ({
     }),
 
   /**
-   * Переключение состояния isFavorite по idOfTrack карточки аудио файла.
+   * Переключение состояния isFavorite по id карточки аудио файла.
    * @param {object} audioDetails - Детали карточки.
-   * @param {string} audioDetails.idOfTrack - Идентификатор карточки.
+   * @param {string} audioDetails.id - Идентификатор карточки.
    * @param {string} audioDetails.imgSrc - Путь к изображению.
    * @param {string} audioDetails.audioSrs - Путь к аудио файлу.
    * @param {string} audioDetails.price - Цена аудио файла.
@@ -99,7 +98,7 @@ const useMusicStore = create((set) => ({
     set((state) => {
       // Обновляем стор с корректным значением isFavorite у аудиофайлов.
       const updateMusicOfStore = state.musicOfStore.map((audioFile) => {
-        if (audioFile.idOfTrack === audioDetails.idOfTrack) {
+        if (audioFile.id === audioDetails.id) {
           audioFile.isFavorite = !audioFile.isFavorite;
         }
         return audioFile;
@@ -108,7 +107,7 @@ const useMusicStore = create((set) => ({
       // Обновляем local storage актуальными избранными аудио файлами.
       const updatedFavoriteAudioFiles = updateMusicOfStore
         ?.filter((audioFile) => audioFile?.isFavorite)
-        ?.map((audioFile) => audioFile?.idOfTrack);
+        ?.map((audioFile) => audioFile?.id);
 
       localStorage.setItem(
         "favoriteAudioFiles",
@@ -127,13 +126,13 @@ const useMusicStore = create((set) => ({
   },
 
   /**
-    Функция для получения аудио файла по idOfTrack.
-    @param {string} idOfTrack - id аудио файла.
+    Функция для получения аудио файла по id.
+    @param {string} id - id аудио файла.
     @returns {Object|null} Возвращает найденный продукт или null.
     */
-  getAudioFileByIdOfTrack: (idOfTrack) => (state) => {
+  getAudioFileByIdOfTrack: (id) => (state) => {
     state.musicOfStore.find((audioFile) => {
-      return audioFile.idOfTrack === idOfTrack || null;
+      return audioFile.id === id || null;
     });
   },
 }));
