@@ -1,5 +1,12 @@
-import useForm from "../../../hooks/useForm";
+/* *********************************************** */
+/* Пока нигде не используется, но может пригодится */
+/* *********************************************** */
+
+// components
 import Input from "../Input/Input";
+
+// hooks
+import useForm from "../../../hooks/useForm";
 
 // Пример реализации валидаций с использованием хука useForm()
 const Form = () => {
