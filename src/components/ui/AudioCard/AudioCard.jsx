@@ -7,7 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  * Компонент карточка
  * @param {object} props - Свойства компонента.
  * @param {object} props.audioDetails - Детали карточки.
- * @param {string} props.audioDetails.idOfTrack - Идентификатор карточки.
+ * @param {string} props.audioDetails.id - Идентификатор карточки.
  * @param {string} props.audioDetails.imgSrc - Путь к изображению.
  * @param {string} props.audioDetails.audioSrs - Путь к аудио файлу.
  * @param {string} props.audioDetails.price - Цена аудио файла.

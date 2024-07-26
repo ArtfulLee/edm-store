@@ -6,7 +6,7 @@
  * @param {object} props.progressBarRef - Референс на входные параметры прогрессбара.
  * @param {function} props.handleNext - Обработчик для переключения на следующий аудиофайл.
  * @param {object} props.currentTrack - Детали карточки.
- * @param {string} props.currentTrack.idOfTrack - Идентификатор карточки.
+ * @param {string} props.currentTrack.id - Идентификатор карточки.
  * @param {string} props.currentTrack.imgSrc - Путь к изображению.
  * @param {string} props.currentTrack.audioSrs - Путь к аудио файлу.
  * @param {string} props.currentTrack.price - Цена аудио файла.

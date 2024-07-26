@@ -43,7 +43,7 @@ const AudioCards = () => {
   // Обработчик добавления товара в избранное и показа уведомления.
   const handleFavoriteAndShowAlert = (audioDetails) => {
     // Достаем из стора поле isFavorite выбранного продукта.
-    const { isFavorite } = getAudioFileByIdOfTrack(audioDetails.idOfTrack);
+    const { isFavorite } = getAudioFileByIdOfTrack(audioDetails.id);
 
     // Меняет состояние isFavorite у выбранного аудио файла.
     onToggleFavorite(audioDetails);
@@ -67,7 +67,7 @@ const AudioCards = () => {
               .map((audioFile) => {
                 return (
                   <AudioCard
-                    key={audioFile.idOfTrack}
+                    key={audioFile.id}
                     audioDetails={audioFile}
                     handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
                   />
