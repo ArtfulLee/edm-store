@@ -59,8 +59,8 @@ export const AuthProvider = ({ children }) => {
       const newUser = {
         ...userData,
         role: adminExists ? "user" : "admin",
-        favoritesAudio: null,
-        boughtAudioFiles: null,
+        favoritesAudio: [],
+        boughtAudioFiles: [],
       };
 
       // Отправка запроса на создание нового пользователя.
