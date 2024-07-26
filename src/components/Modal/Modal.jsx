@@ -54,22 +54,22 @@ export const Modal = ({ isOpen, title, onClose, children }) => {
   return (
     isOpen &&
     createPortal(
-      <div className="fixed z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-black">
+      <div className="fixed z-10 top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-50 bg-neutral-950">
         <div
           ref={modalRef}
-          className="modal bg-white p-4 rounded shadow-md w-96"
+          className="modal border border-neutral-700 bg-neutral-800 m-4 shadow-md w-full md:w-6/12 lg:w-5/12 xl:w-4/12 2xl:w-3/12"
         >
-          <header className="flex justify-between mb-8">
-            {title && <h2 className="text-3xl">{title}</h2>}
+          <header className="flex justify-between p-4 border-b border-neutral-700">
+            {title && <h2 className="text-lg text-neutral-50 font-semibold">{title}</h2>}
             <button
               onClick={handleClose}
-              className="text-gray-600 hover:text-gray-800 w-10 h-10 inline-flex justify-center items-center text-xl"
+              className="text-neutral-50 hover:text-emerald-400"
             >
               <CloseIcon />
             </button>
           </header>
-          <main className="modal-content pt-0 pb-0">{children}</main>
-          <footer className="flex justify-end mt-4"></footer>
+          <main className="modal-content px-4 pt-4">{children}</main>
+          <footer className="flex justify-end px-4 pb-4"></footer>
         </div>
       </div>,
       document.body
