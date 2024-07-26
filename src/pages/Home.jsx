@@ -1,3 +1,4 @@
+// components
 import AudioCards from "../components/ui/AudioCards/AudioCards";
 
 const Home = () => {

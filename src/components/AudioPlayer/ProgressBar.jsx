@@ -1,5 +1,5 @@
 // utils
-import { formatTime } from "../../../utils/formatTime";
+import { formatTime } from "../../utils/formatTime" 
 
 /**
  * Компонент Прогрессбар.

@@ -6,7 +6,7 @@
  * @param {object} props.progressBarRef - Референс на входные параметры прогрессбара.
  * @param {function} props.handleNext - Обработчик для переключения на следующий аудиофайл.
  * @param {object} props.currentTrack - Детали карточки.
- * @param {string} props.currentTrack.idOfTrack - Идентификатор карточки.
+ * @param {string} props.currentTrack.id - Идентификатор карточки.
  * @param {string} props.currentTrack.imgSrc - Путь к изображению.
  * @param {string} props.currentTrack.audioSrs - Путь к аудио файлу.
  * @param {string} props.currentTrack.price - Цена аудио файла.
@@ -25,7 +25,7 @@ const DisplayTrack = (props) => {
     <>
       {/* Текущий аудио файл для воспроизведения. */}
       <audio
-        src={currentTrack.audioSrs}
+        src={currentTrack?.audioSrs}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}
@@ -35,10 +35,10 @@ const DisplayTrack = (props) => {
       {/* Данные аудио файла */}
       <div className="flex space-x-2">
         <div className="w-20 h-20 flex justify-center justify-items-center">
-          {currentTrack.imgSrc ? (
+          {currentTrack?.imgSrc ? (
             <img
               className="block"
-              src={currentTrack.imgSrc}
+              src={currentTrack?.imgSrc}
               alt="audio-cover"
             />
           ) : (
@@ -50,13 +50,13 @@ const DisplayTrack = (props) => {
         </div>
         <div className="w-52 max-w-52">
           <div className="line-clamp-1 text-neutral-50 text-lg">
-            {currentTrack.nameOfTrack}
+            {currentTrack?.nameOfTrack}
           </div>
           <div className="line-clamp-1 text-neutral-400">
-            {currentTrack.artist}
+            {currentTrack?.artist}
           </div>
           <div className="line-clamp-1 text-neutral-400">
-            {currentTrack.label}
+            {currentTrack?.label}
           </div>
         </div>
       </div>

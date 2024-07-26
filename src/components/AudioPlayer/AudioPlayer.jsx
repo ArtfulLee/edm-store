@@ -2,7 +2,7 @@
 import { useState, useRef } from "react";
 
 // Сторы
-import useMusicStore from "../../../store/useMusicStore";
+import useMusicStore from "../../store/useMusicStore";
 
 // Компоненты
 import DisplayTrack from "./DisplayTrack";
@@ -64,33 +64,35 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div className="bg-neutral-900 py-4">
-        <div className="container mx-auto px-4 flex flex-wrap justify-between">
-          <DisplayTrack
-            currentTrack={currentTrack}
-            audioRef={audioRef}
-            progressBarRef={progressBarRef}
-            setDuration={setDuration}
-            handleNext={handleNext}
-            onLoadedMetadata={onLoadedMetadata}
-          />
-          <ProgressBar
-            audioRef={audioRef}
-            progressBarRef={progressBarRef}
-            timeProgress={timeProgress}
-            duration={duration}
-          />
-          <Controls
-            audioRef={audioRef}
-            progressBarRef={progressBarRef}
-            duration={duration}
-            setTimeProgress={setTimeProgress}
-            handlePrevious={handlePrevious}
-            handleNext={handleNext}
-            onLoadedMetadata={onLoadedMetadata}
-          />
+      {!!musicOfStore.length && (
+        <div className="bg-neutral-900 py-4">
+          <div className="container mx-auto px-4 flex flex-wrap justify-between">
+            <DisplayTrack
+              currentTrack={currentTrack}
+              audioRef={audioRef}
+              progressBarRef={progressBarRef}
+              setDuration={setDuration}
+              handleNext={handleNext}
+              onLoadedMetadata={onLoadedMetadata}
+            />
+            <ProgressBar
+              audioRef={audioRef}
+              progressBarRef={progressBarRef}
+              timeProgress={timeProgress}
+              duration={duration}
+            />
+            <Controls
+              audioRef={audioRef}
+              progressBarRef={progressBarRef}
+              duration={duration}
+              setTimeProgress={setTimeProgress}
+              handlePrevious={handlePrevious}
+              handleNext={handleNext}
+              onLoadedMetadata={onLoadedMetadata}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
