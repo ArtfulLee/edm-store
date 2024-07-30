@@ -9,9 +9,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  * @param {object} props.audioDetails - Детали карточки.
  * @param {string} props.audioDetails.id - Идентификатор карточки.
  * @param {string} props.audioDetails.imgSrc - Путь к изображению.
- * @param {string} props.audioDetails.audioSrs - Путь к аудио файлу.
+ * @param {string} props.audioDetails.audioSrc - Путь к аудио файлу.
  * @param {string} props.audioDetails.price - Цена аудио файла.
- * @param {string} props.audioDetails.nameOfTrack - Название композиции.
+ * @param {string} props.audioDetails.title - Название композиции.
  * @param {string} props.audioDetails.artist - Имена артистов.
  * @param {string} props.audioDetails.genre - Жанр. (WIP)
  * @param {string} props.audioDetails.isFavorite - Добавлено в избранные или нет. (WIP)
@@ -61,7 +61,7 @@ const AudioCard = (props) => {
         {/* Start Информация по карточке. */}
         <div className="py-2">
           <p className="line-clamp-1 text-neutral-50 text-lg">
-            {audioDetails.nameOfTrack}
+            {audioDetails.title}
           </p>
           <p className="line-clamp-1 text-neutral-400">{audioDetails.artist}</p>
         </div>

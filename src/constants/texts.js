@@ -2,14 +2,13 @@
  * Глобальный объект AUDIO__TEXTS
  */
 export const AUDIO__TEXTS = {
-  id: "Идентификатор карточки",
-  imgSrc: "Путь к изображению",
-  audioSrs: "Путь к аудио файлу",
-  price: "Цена аудио файла",
-  nameOfTrack: "Название композиции",
-  artist: "Имена артистов",
-  genre: "Жанр",
-  label: "Лейбл",
-  isFavorite: "Добавлено в избранные или нет",
-  numberOfSales: "Количество продаж",
+  id: "ID Card",
+  imgSrc: "Image Src",
+  audioSrc: "Audio Src",
+  price: "Price",
+  title: "Title",
+  artist: "Artist",
+  genre: "Genre",
+  label: "Label",
+  numberOfSales: "Sales",
 };

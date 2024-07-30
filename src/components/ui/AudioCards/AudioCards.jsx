@@ -1,12 +1,17 @@
 // React
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 // Components
 import AudioCard from "../AudioCard/AudioCard";
 import Alert from "../Alert/Alert";
+import Table from "../Table/Table";
 
 // Store
 import useMusicStore from "../../../store/useMusicStore";
+
+//constants
+import { AUDIO__TEXTS } from "../../../constants/texts";
 
 /**
  * Отрисовка карточек.
@@ -24,6 +29,9 @@ const AudioCards = () => {
     getAudioFileByIdOfTrack: state.getAudioFileByIdOfTrack,
     onToggleFavorite: state.onToggleFavorite,
   }));
+
+  // Получение текущего пути URL
+  const currentPathURL = useLocation();
 
   useEffect(() => {
     fetchMusicFromDB();
@@ -61,8 +69,9 @@ const AudioCards = () => {
     <>
       <section className="AudioCards">
         <div className="flex justify-between flex-wrap my-4">
-          {/* Возвращаем карточки аудио файлов. */}
-          {!!musicOfStore.length &&
+          {/* Возвращаем карточки аудио файлов на Home page. */}
+          {currentPathURL.pathname === "/" &&
+            !!musicOfStore.length &&
             musicOfStore
               .map((audioFile) => {
                 return (
@@ -74,6 +83,11 @@ const AudioCards = () => {
                 );
               })
               .reverse()}
+
+          {/* Возвращаем карточки аудио файлов на Admin page. */}
+          {currentPathURL.pathname === "/admin" && (
+            <Table data={musicOfStore} headers={AUDIO__TEXTS} />
+          )}
         </div>
       </section>
 
