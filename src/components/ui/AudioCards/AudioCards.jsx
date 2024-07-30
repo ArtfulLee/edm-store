@@ -85,8 +85,8 @@ const AudioCards = () => {
               .reverse()}
 
           {/* Возвращаем карточки аудио файлов на Admin page. */}
-          {currentPathURL.pathname === "/admin" && (
-            <Table data={musicOfStore} headers={AUDIO__TEXTS} />
+          {currentPathURL.pathname === "/admin" && !!musicOfStore && (
+            <Table musicOfStore={musicOfStore} headers={AUDIO__TEXTS} />
           )}
         </div>
       </section>
