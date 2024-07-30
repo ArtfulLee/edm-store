@@ -31,9 +31,11 @@ const Table = ({ musicOfStore, headers }) => {
         {/* End Headers */}
         {console.log("musicOfStore", musicOfStore)}
         {!!musicOfStore &&
-          musicOfStore.map((audioFile) => {
-            return <TableRow key={audioFile.id} audioFile={audioFile} />;
-          })}
+          musicOfStore
+            .map((audioFile) => {
+              return <TableRow key={audioFile.id} audioFile={audioFile} />;
+            })
+            .reverse()}
       </div>
     </>
   );

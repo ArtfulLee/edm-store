@@ -13,7 +13,7 @@ const TableRow = ({ audioFile }) => {
   console.log("audioFile", audioFile);
   return (
     <>
-      <div className="flex w-full bg-neutral-700">
+      <div className="flex w-full bg-neutral-700 hover:bg-neutral-600">
         <div className="flex items-center w-2/12 p-1   space-x-1">
           <div className="w-10 aspect-square">
             <img className="block" src={audioFile.imgSrc} alt="" />
