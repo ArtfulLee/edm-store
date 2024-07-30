@@ -46,30 +46,22 @@ const useMusicStore = create((set) => ({
   /**
    * Функция добавляния нового аудио файла в музыкальных композиций на сервер db.json.
    * @param {string} imgSrc - Путь к изображению.
-   * @param {string} audioSrs - Путь к аудио файлу.
+   * @param {string} audioSrc - Путь к аудио файлу.
    * @param {string} price - Цена аудио файла.
-   * @param {string} nameOfTrack - Название композиции.
+   * @param {string} title - Название композиции.
    * @param {string} artist - Имена артистов.
    * @param {string} genre - Жанр.
    * @param {string} label - Лейбл.
    * @returns {Array} - Обновленный массив объектов musicOfStore.
    */
-  addMusicInStore: (
-    imgSrc,
-    audioSrs,
-    price,
-    nameOfTrack,
-    artist,
-    genre,
-    label
-  ) =>
+  addMusicInStore: (imgSrc, audioSrc, price, title, artist, genre, label) =>
     set((state) => {
       const newTrackForStore = {
         id: nanoid(),
         imgSrc,
-        audioSrs,
+        audioSrc,
         price,
-        nameOfTrack,
+        title,
         artist,
         genre,
         label,
@@ -85,9 +77,9 @@ const useMusicStore = create((set) => ({
    * @param {object} audioDetails - Детали карточки.
    * @param {string} audioDetails.id - Идентификатор карточки.
    * @param {string} audioDetails.imgSrc - Путь к изображению.
-   * @param {string} audioDetails.audioSrs - Путь к аудио файлу.
+   * @param {string} audioDetails.audioSrc - Путь к аудио файлу.
    * @param {string} audioDetails.price - Цена аудио файла.
-   * @param {string} audioDetails.nameOfTrack - Название композиции.
+   * @param {string} audioDetails.title - Название композиции.
    * @param {string} audioDetails.artist - Имена артистов.
    * @param {string} audioDetails.genre - Жанр. (WIP)
    * @param {string} audioDetails.isFavorite - Добавлено в избранные или нет. (WIP)

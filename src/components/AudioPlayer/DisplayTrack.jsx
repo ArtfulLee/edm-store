@@ -8,9 +8,9 @@
  * @param {object} props.currentTrack - Детали карточки.
  * @param {string} props.currentTrack.id - Идентификатор карточки.
  * @param {string} props.currentTrack.imgSrc - Путь к изображению.
- * @param {string} props.currentTrack.audioSrs - Путь к аудио файлу.
+ * @param {string} props.currentTrack.audioSrc - Путь к аудио файлу.
  * @param {string} props.currentTrack.price - Цена аудио файла.
- * @param {string} props.currentTrack.nameOfTrack - Название композиции.
+ * @param {string} props.currentTrack.title - Название композиции.
  * @param {string} props.currentTrack.artist - Имена артистов.
  * @param {string} props.currentTrack.genre - Жанр. (WIP)
  * @param {string} props.currentTrack.label - Лейбл. (WIP)
@@ -25,7 +25,7 @@ const DisplayTrack = (props) => {
     <>
       {/* Текущий аудио файл для воспроизведения. */}
       <audio
-        src={currentTrack?.audioSrs}
+        src={currentTrack?.audioSrc}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}
@@ -50,7 +50,7 @@ const DisplayTrack = (props) => {
         </div>
         <div className="w-52 max-w-52">
           <div className="line-clamp-1 text-neutral-50 text-lg">
-            {currentTrack?.nameOfTrack}
+            {currentTrack?.title}
           </div>
           <div className="line-clamp-1 text-neutral-400">
             {currentTrack?.artist}
