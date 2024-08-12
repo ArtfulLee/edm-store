@@ -68,7 +68,7 @@ const AudioCard = (props) => {
         <div className="flex justify-end">
           {/* Start Кнопка добавления аудио яайла в избранные. */}
           <button
-            className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-neutral-500"
+            className="flex items-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-neutral-500 border-2 border-neutral-500"
             onClick={handleFavorite}
           >
             {audioDetails.isFavorite ? (
@@ -79,7 +79,8 @@ const AudioCard = (props) => {
           </button>
           {/* End Кнопка добавления аудио яайла в избранные. */}
           {/* start Кнопка для покупки аудио файла. */}
-          <button className="flex items-center space-x-2 line-clamp-1 p-2 text-neutral-50 bg-pink-500">
+          <button className="flex items-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500">
+            {/* border-2 border-emerald-400 text-emerald-400 font-semibold p-1 */}
             <div className="font-semibold">{audioDetails.price}</div>
             <ShoppingCartIcon fontSize="small" />
           </button>
