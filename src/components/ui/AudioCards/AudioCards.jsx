@@ -17,7 +17,7 @@ import { AUDIO__TEXTS } from "../../../constants/texts";
  * Отрисовка карточек.
  * @returns {JSX.Element} Элемент JSX.
  */
-const AudioCards = () => {
+const AudioCards = ({ handleRowDoubleClick }) => {
   const {
     musicOfStore,
     fetchMusicFromDB,
@@ -86,7 +86,11 @@ const AudioCards = () => {
 
           {/* Возвращаем карточки аудио файлов на Admin page. */}
           {currentPathURL.pathname === "/admin" && !!musicOfStore && (
-            <Table musicOfStore={musicOfStore} headers={AUDIO__TEXTS} />
+            <Table
+              musicOfStore={musicOfStore}
+              headers={AUDIO__TEXTS}
+              handleRowDoubleClick={handleRowDoubleClick}
+            />
           )}
         </div>
       </section>

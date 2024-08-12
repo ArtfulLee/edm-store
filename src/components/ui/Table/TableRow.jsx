@@ -9,11 +9,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  * @param {Array} props.data - Массив объектов (содержимое таблицы).
  * @returns {JSX.Element} Элемент JSX.
  */
-const TableRow = ({ audioFile }) => {
-  console.log("audioFile", audioFile);
+const TableRow = ({ audioFile, handleRowDoubleClick }) => {
   return (
     <>
-      <div className="flex w-full bg-neutral-700 hover:bg-neutral-600">
+      <div
+        className="flex w-full bg-neutral-700 hover:bg-neutral-600"
+        onDoubleClick={() => handleRowDoubleClick()}
+      >
         <div className="flex items-center w-2/12 p-1   space-x-1">
           <div className="w-10 aspect-square">
             <img className="block" src={audioFile.imgSrc} alt="" />
