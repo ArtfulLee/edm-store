@@ -1,6 +1,6 @@
 // constants
-import { SERVER_CONSTANTS } from "../../server/serverConstants";
-import { ERROR_TEXTS } from "../constants/errorTexts";
+import { SERVER__CONSTANTS } from "../../server/serverConstants";
+import { ERROR__TEXTS } from "../constants/errorTexts";
 
 // Сторы
 import { create } from "zustand";
@@ -26,12 +26,12 @@ const useMusicStore = create((set) => ({
   fetchMusicFromDB: async () => {
     try {
       const response = await fetch(
-        `${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.musicOfStore}`
+        `${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.musicOfStore}`
       );
 
       if (!response.ok)
         throw new Error(
-          `${ERROR_TEXTS.errorFetch} ${SERVER_CONSTANTS.server.musicOfStore}`
+          `${ERROR__TEXTS.errorFetch} ${SERVER__CONSTANTS.server.musicOfStore}`
         );
 
       set({

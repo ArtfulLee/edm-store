@@ -12,6 +12,10 @@ import { Drawer } from "../components/ui/Drawer/Drawer";
 // store
 import useMusicStore from "../store/useMusicStore";
 
+// constants
+import { ALERT__TEXTS } from "../constants/alertTexts";
+import { AUDIO__TEXTS } from "../constants/texts";
+
 const Admin = () => {
   // Стейт для скрытия/показа компонента Drawer
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -31,7 +35,8 @@ const Admin = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   // Стор для CRUD операций.
-  const {fetchMusicFromDB, addMusicInStore, editItem, deleteItem } = useMusicStore();
+  const { fetchMusicFromDB, addMusicInStore, editItem, deleteItem } =
+    useMusicStore();
 
   useEffect(() => {
     fetchMusicFromDB();
@@ -59,8 +64,8 @@ const Admin = () => {
       editItem(selectedValue?.id, formValues);
 
       setAlertData({
-        title: "Редактирование товара.",
-        subtitle: "Товар был успешно отредактирован.",
+        title: ALERT__TEXTS.editItem.title,
+        subtitle: ALERT__TEXTS.editItem.subtitle,
         variant: "neutral",
         isOpen: true,
       });
@@ -68,8 +73,8 @@ const Admin = () => {
       // Если товар не выбран, добавляем новый товар
       addMusicInStore(formValues);
       setAlertData({
-        title: "Добавление товара.",
-        subtitle: "Товар был успешно добавлен.",
+        title: ALERT__TEXTS.addItem.title,
+        subtitle: ALERT__TEXTS.addItem.subtitle,
         variant: "neutral",
         isOpen: true,
       });
@@ -99,8 +104,8 @@ const Admin = () => {
       setSelectedValue(null);
       setIsEditing(false); // Сбрасываем режим редактирования
       setAlertData({
-        title: "Удаление товара.",
-        subtitle: "Товар был удален.",
+        title: ALERT__TEXTS.deleteItem.title,
+        subtitle: ALERT__TEXTS.deleteItem.subtitle,
         variant: "neutral",
         isOpen: true,
       });
@@ -110,11 +115,11 @@ const Admin = () => {
   /**
    * Обрабатывает двойной клик по строке таблицы.
    *
-   * @param {Object} rowData - Данные строки, по которой был выполнен двойной клик.
+   * @param {Object} audioFile - Данные строки, по которой был выполнен двойной клик.
    * @returns {void}
    */
-  const handleRowDoubleClick = (rowData) => {
-    setSelectedValue(rowData);
+  const handleRowDoubleClick = (audioFile) => {
+    setSelectedValue(audioFile);
     setDrawerOpen(true);
     setIsEditing(false); // Режим просмотра по умолчанию
   };
@@ -155,14 +160,11 @@ const Admin = () => {
           <div className="w-full max-w-xs">
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="name"
-                >
-                  Название товара
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.artist}
                 </label>
                 <input
-                  className="shadow read-only:bg-gray-200 read-only:cursor-not-allowed appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
                   name="name"
                   type="text"
                   defaultValue={formValues?.name || selectedValue?.name}
@@ -172,36 +174,86 @@ const Admin = () => {
                 />
               </div>
               <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="category"
-                >
-                  Категория товара
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.title}
                 </label>
                 <input
-                  className="shadow read-only:bg-gray-200 read-only:cursor-not-allowed appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  name="category"
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
+                  name="name"
                   type="text"
-                  defaultValue={formValues?.category || selectedValue?.category}
+                  defaultValue={formValues?.name || selectedValue?.name}
                   onChange={handleInput}
-                  placeholder="Введите категорию"
+                  placeholder="Введите название"
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="price"
-                >
-                  Цена товара
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.genre}
                 </label>
                 <input
-                  className="shadow read-only:bg-gray-200 read-only:cursor-not-allowed appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  name="price"
-                  type="number"
-                  defaultValue={formValues?.price || selectedValue?.price}
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
+                  name="name"
+                  type="text"
+                  defaultValue={formValues?.name || selectedValue?.name}
                   onChange={handleInput}
-                  placeholder="Введите цену"
+                  placeholder="Введите название"
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.audioSrc}
+                </label>
+                <input
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
+                  name="name"
+                  type="text"
+                  defaultValue={formValues?.name || selectedValue?.name}
+                  onChange={handleInput}
+                  placeholder="Введите название"
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.imgSrc}
+                </label>
+                <input
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
+                  name="name"
+                  type="text"
+                  defaultValue={formValues?.name || selectedValue?.name}
+                  onChange={handleInput}
+                  placeholder="Введите название"
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.label}
+                </label>
+                <input
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
+                  name="name"
+                  type="text"
+                  defaultValue={formValues?.name || selectedValue?.name}
+                  onChange={handleInput}
+                  placeholder="Введите название"
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-neutral-50" htmlFor="name">
+                  {AUDIO__TEXTS.price}
+                </label>
+                <input
+                  className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
+                  name="name"
+                  type="text"
+                  defaultValue={formValues?.name || selectedValue?.name}
+                  onChange={handleInput}
+                  placeholder="Введите название"
                   readOnly={!isEditing}
                 />
               </div>
@@ -209,11 +261,25 @@ const Admin = () => {
               <div className="flex gap-4">
                 {!isEditing && selectedValue && (
                   <>
-                    <button onClick={handleEditItem}>Редактировать</button>
-                    <button onClick={handleDeleteItem}>Удалить</button>
+                    <button
+                      className="w-full bg-yellow-400 text-neutral-900 font-semibold p-2"
+                      onClick={handleEditItem}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="w-full bg-red-400 text-neutral-900 font-semibold p-2"
+                      onClick={handleDeleteItem}
+                    >
+                      Delete
+                    </button>
                   </>
                 )}
-                {isEditing && <button>Сохранить</button>}
+                {isEditing && (
+                  <button className="w-full bg-emerald-400 text-neutral-900 font-semibold p-2">
+                    Сохранить
+                  </button>
+                )}
               </div>
             </form>
           </div>
