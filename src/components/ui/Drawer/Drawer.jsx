@@ -86,17 +86,17 @@ export const Drawer = ({
             align === "right" ? "right-0" : "left-0"
           } right-0 z-20 w-2/6 p-4 border border-neutral-700 bg-neutral-800 transition-transform duration-300 ease-in-out  `}
         >
-          <header className="relative flex justify-between mb-4">
-            {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
+          <header className="flex justify-between pb-2 mb-4 border-b border-neutral-700">
+            {title && <h2 className="text-lg text-neutral-50 font-semibold">{title}</h2>}
             <button
               onClick={closeDrawer}
-              className="text-neutral-50 hover:text-emerald-400 inline-flex justify-center items-center absolute top-0 right-0 text-lg"
+              className="text-neutral-50 hover:text-emerald-400 inline-flex justify-center items-center text-lg p-1"
             >
               <CloseIcon />
             </button>
           </header>
-          <main className="px-4 pt-4">{children}</main>
-          <footer className="flex justify-end px-4 pb-4"></footer>
+          <main className="py-4">{children}</main>
+          <footer className="flex justify-end pb-4"></footer>
         </aside>
       </div>,
       document.body
