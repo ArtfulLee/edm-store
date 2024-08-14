@@ -152,12 +152,12 @@ const Admin = () => {
           title={
             selectedValue
               ? isEditing
-                ? "Редактирование товара"
-                : "Чтение данных по товару"
-              : "Добавление нового товара"
+                ? "Editing audio file"
+                : "Viewing audio file"
+              : "Adding audio file"
           }
         >
-          <div className="w-full max-w-xs">
+          <div className="w-full">
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
                 <label className="block text-neutral-50" htmlFor="name">
@@ -258,7 +258,7 @@ const Admin = () => {
                 />
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex space-x-2 py-2">
                 {!isEditing && selectedValue && (
                   <>
                     <button
