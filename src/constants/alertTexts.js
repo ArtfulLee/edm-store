@@ -1,13 +1,13 @@
 export const ALERT__TEXTS = {
-  editItem: {
+  editAudioFileOfStore: {
     title: "Successfully edited",
     subtitle: "The item has been successfully edited",
   },
-  addItem: {
+  addAudioFileInStore: {
     title: "Successfully added",
     subtitle: "The item has been successfully added",
   },
-  deleteItem: {
+  deleteAudioFileFromStore: {
     title: "Successfully deleted",
     subtitle: "The item has been successfully deleted",
   },

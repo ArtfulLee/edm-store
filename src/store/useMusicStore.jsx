@@ -14,12 +14,12 @@ import { nanoid } from "nanoid";
  * @prop {array} useMusicStore.musicOfStore - Массив музыкальных композиций.
  * @prop {string} useMusicStore.error - текст ошибки запроса.
  * @prop {function} useMusicStore.fetchMusicFromDB - запрос на получение аудио файлов для "useMusicStore.musicOfStore" с сервера db.json.
- * @prop {function} useMusicStore.addMusicInStore - Функция добавляния нового аудио файла в музыкальных композиций на сервер db.json.
+ * @prop {function} useMusicStore.addAudioFileInStore - Функция добавляния нового аудио файла в музыкальных композиций на сервер db.json.
  * @prop {function} useMusicStore.onToggleFavorite - Переключение состояния isFavorite по id карточки аудио файла.
  * @prop {function} useMusicStore.getFavoriteAudioFiles - Функция для получения избранных аудио файлов пользователя.
  * @prop {function} useMusicStore.getAudioFileByIdOfTrack - Функция для получения аудио файла по id.
  */
-const useMusicStore = create((set) => ({
+const useMusicStore = create((set, get) => ({
   musicOfStore: [],
   error: null,
 
@@ -54,8 +54,16 @@ const useMusicStore = create((set) => ({
    * @param {string} label - Лейбл.
    * @returns {Array} - Обновленный массив объектов musicOfStore.
    */
-  addMusicInStore: (imgSrc, audioSrc, price, title, artist, genre, label) =>
-    set((state) => {
+  addAudioFileInStore: async ({
+    imgSrc,
+    audioSrc,
+    price,
+    title,
+    artist,
+    genre,
+    label,
+  }) => {
+    try {
       const newTrackForStore = {
         id: nanoid(),
         imgSrc,
@@ -69,8 +77,93 @@ const useMusicStore = create((set) => ({
         numberOfSales: 0,
       };
 
-      return { musicOfStore: [...state.musicOfStore, newTrackForStore] };
-    }),
+      const response = await fetch(
+        `${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.musicOfStore}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTrackForStore),
+        }
+      );
+
+      if (!response?.ok) {
+        throw new Error(`HTTP error! Status: ${response?.status}`);
+      }
+
+      set({
+        musicOfStore: [...get().musicOfStore, newTrackForStore],
+      });
+    } catch (error) {
+      set({ error: error.message });
+    }
+  },
+
+  /**
+   * Функция удаления аудио файла по id из сервера db.json.
+   * @param {number} id - id аудио файла, который необходимо удалить.
+   * @returns {Promise<void>} - Промис.
+   * @throws {Error} - Выбрасывает ошибку, если HTTP-запрос завершился неудачей.
+   */
+  deleteAudioFileFromStore: async (id) => {
+    try {
+      const response = await fetch(
+        `${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.musicOfStore}${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response?.ok) {
+        throw new Error(`HTTP error! Status: ${response?.status}`);
+      }
+
+      console.log("Deleted item:", id);
+
+      set((state) => ({
+        musicOfStore: state?.musicOfStore?.filter((audio) => audio?.id !== id),
+      }));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  },
+
+  /**
+   * Функция обновления аудио файла по id в сервере db.json.
+   * @param {number} id - id товара, который необходимо обновить.
+   * @param {Object} updatedAudioFile - Обновленные данные товара.
+   * @returns {Promise<void>} - Промис.
+   * @throws {Error} - Выбрасывает ошибку, если HTTP-запрос завершился неудачей.
+   */
+
+  editAudioFileOfStore: async (id, updatedAudioFile) => {
+    try {
+      const response = await fetch(
+        `${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.musicOfStore}${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON?.stringify(updatedAudioFile),
+        }
+      );
+
+      if (!response?.ok) {
+        throw new Error(`HTTP error! Status: ${response?.status}`);
+      }
+
+      const data = await response?.json();
+      console.log("Updated audio:", data);
+
+      set((state) => ({
+        musicOfStore: state?.musicOfStore?.map((audio) => (audio?.id === id ? data : audio)),
+      }));
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  },
 
   /**
    * Переключение состояния isFavorite по id карточки аудио файла.

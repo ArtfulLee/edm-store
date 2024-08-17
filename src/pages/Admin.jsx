@@ -15,6 +15,7 @@ import useMusicStore from "../store/useMusicStore";
 // constants
 import { ALERT__TEXTS } from "../constants/alertTexts";
 import { AUDIO__TEXTS } from "../constants/texts";
+import { NEW__AUDIO__PLACEHOLDERS } from "../constants/placeholders";
 
 const Admin = () => {
   // Стейт для скрытия/показа компонента Drawer
@@ -35,8 +36,12 @@ const Admin = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   // Стор для CRUD операций.
-  const { fetchMusicFromDB, addMusicInStore, editItem, deleteItem } =
-    useMusicStore();
+  const {
+    fetchMusicFromDB,
+    addAudioFileInStore,
+    editAudioFileOfStore,
+    deleteAudioFileFromStore,
+  } = useMusicStore();
 
   useEffect(() => {
     fetchMusicFromDB();
@@ -52,7 +57,6 @@ const Admin = () => {
   /**
    * Обработка отправки формы.
    * Если товар выбран, то редактируем его, иначе добавляем новый товар.
-   *
    * @param {Event} event - Событие отправки формы.
    * @returns {void}
    */
@@ -61,20 +65,20 @@ const Admin = () => {
 
     if (selectedValue) {
       // Если товар выбран, редактируем его
-      editItem(selectedValue?.id, formValues);
+      editAudioFileOfStore(selectedValue?.id, formValues);
 
       setAlertData({
-        title: ALERT__TEXTS.editItem.title,
-        subtitle: ALERT__TEXTS.editItem.subtitle,
+        title: ALERT__TEXTS.editAudioFileOfStore.title,
+        subtitle: ALERT__TEXTS.editAudioFileOfStore.subtitle,
         variant: "neutral",
         isOpen: true,
       });
     } else {
       // Если товар не выбран, добавляем новый товар
-      addMusicInStore(formValues);
+      addAudioFileInStore(formValues);
       setAlertData({
-        title: ALERT__TEXTS.addItem.title,
-        subtitle: ALERT__TEXTS.addItem.subtitle,
+        title: ALERT__TEXTS.addAudioFileInStore.title,
+        subtitle: ALERT__TEXTS.addAudioFileInStore.subtitle,
         variant: "neutral",
         isOpen: true,
       });
@@ -84,8 +88,17 @@ const Admin = () => {
   };
 
   /**
+   * Обработчик события открытия сайдбара для добавления нового аудио файла.
+   * @returns {void}
+   */
+  const handleAddAudioFile = () => {
+    setSelectedValue(null);
+    setIsEditing(true);
+    setDrawerOpen(true);
+  };
+
+  /**
    * Обрабатывает редактирование товара.
-   *
    * @returns {void}
    */
   const handleEditItem = () => {
@@ -94,18 +107,17 @@ const Admin = () => {
 
   /**
    * Обрабатывает удаление товара.
-   *
    * @returns {void}
    */
   const handleDeleteItem = () => {
     if (selectedValue) {
-      deleteItem(selectedValue?.id);
+      deleteAudioFileFromStore(selectedValue?.id);
       setDrawerOpen(false);
       setSelectedValue(null);
       setIsEditing(false); // Сбрасываем режим редактирования
       setAlertData({
-        title: ALERT__TEXTS.deleteItem.title,
-        subtitle: ALERT__TEXTS.deleteItem.subtitle,
+        title: ALERT__TEXTS.deleteAudioFileFromStore.title,
+        subtitle: ALERT__TEXTS.deleteAudioFileFromStore.subtitle,
         variant: "neutral",
         isOpen: true,
       });
@@ -138,8 +150,15 @@ const Admin = () => {
 
   return (
     <>
-      <div className="container mx-auto my-4">
+      <div className="container flex mx-auto my-4 space-x-16">
         <h1 className="text-2xl font-bold text-neutral-50">Audio data table</h1>
+        <button
+          type="button"
+          onClick={handleAddAudioFile}
+          className="border-2 border-emerald-400 bg-emerald-400 text-neutral-900 font-semibold p-1"
+        >
+          Add audio
+        </button>
       </div>
       {/* Отображаем таблицу аудио файлов для редактирования. */}
       <AudioCards handleRowDoubleClick={handleRowDoubleClick} />
@@ -160,100 +179,100 @@ const Admin = () => {
           <div className="w-full">
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="artist">
                   {AUDIO__TEXTS.artist}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="artist"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.artist || selectedValue?.artist}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.artist}
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="title">
                   {AUDIO__TEXTS.title}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="title"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.title || selectedValue?.title}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.title}
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="genre">
                   {AUDIO__TEXTS.genre}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="genre"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.genre || selectedValue?.genre}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.genre}
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="audioSrc">
                   {AUDIO__TEXTS.audioSrc}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="audioSrc"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.audioSrc || selectedValue?.audioSrc}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.audioSrc}
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="imgSrc">
                   {AUDIO__TEXTS.imgSrc}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="imgSrc"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.imgSrc || selectedValue?.imgSrc}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.imgSrc}
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="label">
                   {AUDIO__TEXTS.label}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="label"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.label || selectedValue?.label}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.label}
                   readOnly={!isEditing}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-neutral-50" htmlFor="name">
+                <label className="block text-neutral-50" htmlFor="price">
                   {AUDIO__TEXTS.price}
                 </label>
                 <input
                   className="read-only:bg-gray-200 read-only:cursor-not-allowed read-only:opacity-50 appearance-none w-full border border-neutral-400 p-2 text-neutral-900 focus:outline-none"
-                  name="name"
+                  name="price"
                   type="text"
-                  defaultValue={formValues?.name || selectedValue?.name}
+                  defaultValue={formValues?.price || selectedValue?.price}
                   onChange={handleInput}
-                  placeholder="Введите название"
+                  placeholder={NEW__AUDIO__PLACEHOLDERS.price}
                   readOnly={!isEditing}
                 />
               </div>
