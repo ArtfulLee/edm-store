@@ -2,8 +2,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 // constants
-import { SERVER_CONSTANTS } from "../../server/serverConstants";
-import { ERROR_TEXTS } from "../constants/errorTexts";
+import { SERVER__CONSTANTS } from "../../server/serverConstants";
+import { ERROR__TEXTS } from "../constants/errorTexts";
 
 /**
  * Контекст для управления состоянием  аутентификации пользователя.
@@ -41,14 +41,14 @@ export const AuthProvider = ({ children }) => {
     try {
       // Получение всех пользователей.
       const response = await fetch(
-        `${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.users}`
+        `${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.users}`
       );
 
       const users = await response?.json();
 
       if (!response.ok) {
         throw new Error(
-          `${ERROR_TEXTS.errorFetch}  ${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.users}`
+          `${ERROR__TEXTS.errorFetch}  ${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.users}`
         );
       }
 
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
 
       // Отправка запроса на создание нового пользователя.
       const createResponse = await fetch(
-        `${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.users}`,
+        `${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.users}`,
         {
           method: "POST",
           headers: {
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
 
       localStorage.setItem("user", JSON.stringify(createdUser));
     } catch (error) {
-      console.error(`${ERROR_TEXTS.errorSingUpNewUser}`, error);
+      console.error(`${ERROR__TEXTS.errorSingUpNewUser}`, error);
     }
   };
 
@@ -106,14 +106,14 @@ export const AuthProvider = ({ children }) => {
       // Отправка запроса на сервер для поиска пользователя с указанным логином.
       // encodeURIComponent() — кодирует спец. символы в строке login, для безопасного использования в URL.
       const response = await fetch(
-        `${SERVER_CONSTANTS.server}${
-          SERVER_CONSTANTS.users
+        `${SERVER__CONSTANTS.server}${
+          SERVER__CONSTANTS.users
         }?login=${encodeURIComponent(login)}`
       );
 
       if (!response.ok) {
         throw new Error(
-          `Ошибка при запросе на сервер ${SERVER_CONSTANTS.server}${SERVER_CONSTANTS.users}`
+          `Ошибка при запросе на сервер ${SERVER__CONSTANTS.server}${SERVER__CONSTANTS.users}`
         );
       }
 
@@ -129,7 +129,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("user", JSON.stringify(user));
       } else {
         // Пользователь не найден или данные неверны.
-        console.error(`${ERROR_TEXTS.errorDataAuth}`);
+        console.error(`${ERROR__TEXTS.errorDataAuth}`);
         // Можно добавить логику для отображения ошибки пользователю.
       }
     } catch (error) {
