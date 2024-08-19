@@ -23,7 +23,7 @@ const AudioCard = (props) => {
   const { handleFavoriteAndShowAlert } = props;
 
   /* **************************************** */
-  // Обработчик нажатия кнопку Play/Pause на карточке аудио файла.
+  // Обработчик нажатия кнопку Play на карточке аудио файла.
   const handlePlayOnAudioCard = () => {
     // WIP
   };
@@ -46,16 +46,16 @@ const AudioCard = (props) => {
             src={audioDetails.imgSrc}
             alt="audio-cover"
           />
-          <div className="text-3xl absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
-            {/* Start кнопка Play. */}
+          {/* Start кнопка Play. */}
+          {/* <div className="text-3xl absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
             <button
               className="hover:scale-125 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
               onClick={() => handlePlayOnAudioCard(audioDetails)}
             >
               <PlayArrowIcon fontSize="large" />
             </button>
-            {/* End кнопка Play. */}
-          </div>
+          </div> */}
+          {/* End кнопка Play. */}
         </div>
         {/* End Обложка аудио файла + элементы управления. */}
         {/* Start Информация по карточке. */}
@@ -66,9 +66,15 @@ const AudioCard = (props) => {
           <p className="line-clamp-1 text-neutral-400">{audioDetails.artist}</p>
         </div>
         <div className="flex justify-end">
-          {/* Start Кнопка добавления аудио яайла в избранные. */}
           <button
-            className="flex items-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-neutral-500 border-2 border-neutral-500"
+            onClick={handlePlayOnAudioCard}
+            className="flex items-center justify-center space-x-2 min-w-9 line-clamp-1 p-1 text-neutral-50 bg-neutral-500 border-2 border-neutral-500 hover:bg-neutral-400 hover:border-neutral-400 transition duration-100"
+          >
+            <PlayArrowIcon />
+          </button>
+          {/* Start Кнопка добавления аудио файла в избранные. */}
+          <button
+            className="flex items-center justify-center space-x-2 min-w-9 line-clamp-1 p-1 text-neutral-50 bg-neutral-500 border-2 border-neutral-500 hover:bg-neutral-400 hover:border-neutral-400 transition duration-100"
             onClick={handleFavorite}
           >
             {audioDetails.isFavorite ? (
@@ -77,10 +83,9 @@ const AudioCard = (props) => {
               <FavoriteIcon fontSize="small" />
             )}
           </button>
-          {/* End Кнопка добавления аудио яайла в избранные. */}
+          {/* End Кнопка добавления аудио файла в избранные. */}
           {/* start Кнопка для покупки аудио файла. */}
-          <button className="flex items-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500">
-            {/* border-2 border-emerald-400 text-emerald-400 font-semibold p-1 */}
+          <button className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100">
             <div className="font-semibold">{audioDetails.price}</div>
             <ShoppingCartIcon fontSize="small" />
           </button>

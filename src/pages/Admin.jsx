@@ -155,7 +155,7 @@ const Admin = () => {
         <button
           type="button"
           onClick={handleAddAudioFile}
-          className="border-2 border-emerald-400 bg-emerald-400 text-neutral-900 font-semibold p-1"
+          className="border-2 border-emerald-400 bg-emerald-400 hover:border-emerald-300 hover:bg-emerald-300  text-neutral-900 font-semibold p-1 transition duration-100"
         >
           Add audio
         </button>

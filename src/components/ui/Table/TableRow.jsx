@@ -13,7 +13,7 @@ const TableRow = ({ audioFile, handleRowDoubleClick }) => {
   return (
     <>
       <div
-        className="flex w-full bg-neutral-700 hover:bg-neutral-600"
+        className="flex w-full bg-neutral-700 hover:bg-neutral-600 transition duration-100"
         onDoubleClick={() => handleRowDoubleClick(audioFile)}
       >
         <div className="flex items-center w-2/12 p-1   space-x-1">
