@@ -257,7 +257,7 @@ const Header = () => {
                   />
 
                   <button
-                    className="bg-emerald-400 text-neutral-900 font-semibold p-2"
+                    className="bg-emerald-400 hover:bg-emerald-300 text-neutral-900 font-semibold p-2"
                     type="submit"
                   >
                     Sing Up
@@ -294,7 +294,7 @@ const Header = () => {
                   />
 
                   <button
-                    className="bg-emerald-400 text-neutral-900 font-semibold p-2"
+                    className="bg-emerald-400 hover:bg-emerald-300 text-neutral-900 font-semibold p-2"
                     type="submit"
                   >
                     Sing in
