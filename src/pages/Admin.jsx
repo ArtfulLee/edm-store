@@ -35,7 +35,7 @@ const Admin = () => {
   // Стейт для переключения режима редактирования
   const [isEditing, setIsEditing] = useState(false);
 
-  // Стор для CRUD операций.
+  // Получаем CRUD операции.
   const {
     fetchMusicFromDB,
     addAudioFileInStore,
