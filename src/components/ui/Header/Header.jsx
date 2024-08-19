@@ -167,7 +167,7 @@ const Header = () => {
             </button>
 
             {/* Start Authorization. */}
-            <div id="buttons-wrapper" className="inline-flex items-center">
+            <div id="buttons-wrapper" className="inline-flex items-center space-x-2">
               {!user ? (
                 <>
                   <button
