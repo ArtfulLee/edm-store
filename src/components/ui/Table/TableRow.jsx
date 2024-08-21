@@ -9,7 +9,17 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  * @param {Array} props.data - Массив объектов (содержимое таблицы).
  * @returns {JSX.Element} Элемент JSX.
  */
-const TableRow = ({ audioFile, handleRowDoubleClick }) => {
+const TableRow = ({
+  audioFile,
+  handleRowDoubleClick,
+  handleFavoriteAndShowAlert,
+}) => {
+  const handleFavorite = (event) => {
+    // Предотвр. всплытие события.
+    event.stopPropagation();
+
+    handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioFile);
+  };
   return (
     <>
       <div
@@ -24,8 +34,12 @@ const TableRow = ({ audioFile, handleRowDoubleClick }) => {
           <button className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
             <PlayArrowIcon fontSize="large" />
           </button>
-          <button className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
-            <FavoriteIcon />
+          <button onClick={handleFavorite} className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
+          {audioFile.isFavorite ? (
+              <FavoriteIcon className="text-pink-500" />
+            ) : (
+              <FavoriteIcon />
+            )}
           </button>
         </div>
 

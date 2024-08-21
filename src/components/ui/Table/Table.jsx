@@ -8,7 +8,12 @@ import TableRow from "./TableRow";
  * @param {Array} props.data - Массив объектов (содержимое таблицы).
  * @returns {JSX.Element} Элемент JSX.
  */
-const Table = ({ musicOfStore, headers, handleRowDoubleClick }) => {
+const Table = ({
+  musicOfStore,
+  headers,
+  handleRowDoubleClick,
+  handleFavoriteAndShowAlert,
+}) => {
   return (
     <>
       <div className="flex flex-col w-full space-y-1 text-neutral-50">
@@ -33,7 +38,23 @@ const Table = ({ musicOfStore, headers, handleRowDoubleClick }) => {
         {!!musicOfStore &&
           musicOfStore
             .map((audioFile) => {
-              return <TableRow key={audioFile.id} audioFile={audioFile} handleRowDoubleClick={handleRowDoubleClick} />;
+              // Получаем текущего пользователя
+              const currentUser = JSON.parse(localStorage.getItem("user"));
+
+              // Если пользователь есть, то исправить избранные
+              if (currentUser) {
+                audioFile.isFavorite = currentUser?.favoritesAudio.includes(
+                  audioFile.id
+                );
+              }
+              return (
+                <TableRow
+                  key={audioFile.id}
+                  audioFile={audioFile}
+                  handleRowDoubleClick={handleRowDoubleClick}
+                  handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                />
+              );
             })
             .reverse()}
       </div>

@@ -9,6 +9,7 @@ import Table from "../Table/Table";
 
 // Store
 import useMusicStore from "../../../store/useMusicStore";
+import useUsersStore from "../../../store/useUsersStore";
 
 //constants
 import { AUDIO__TEXTS } from "../../../constants/texts";
@@ -18,15 +19,13 @@ import { AUDIO__TEXTS } from "../../../constants/texts";
  * @returns {JSX.Element} Элемент JSX.
  */
 const AudioCards = ({ handleRowDoubleClick }) => {
-  const {
-    musicOfStore,
-    fetchMusicFromDB,
-    getAudioFileByIdOfTrack,
-    onToggleFavorite,
-  } = useMusicStore((state) => ({
+  const { musicOfStore, fetchMusicFromDB } = useMusicStore((state) => ({
     musicOfStore: state.musicOfStore,
     fetchMusicFromDB: state.fetchMusicFromDB,
-    getAudioFileByIdOfTrack: state.getAudioFileByIdOfTrack,
+  }));
+
+  const { fetchUsersFromDB, onToggleFavorite } = useUsersStore((state) => ({
+    fetchUsersFromDB: state.fetchUsersFromDB,
     onToggleFavorite: state.onToggleFavorite,
   }));
 
@@ -35,7 +34,8 @@ const AudioCards = ({ handleRowDoubleClick }) => {
 
   useEffect(() => {
     fetchMusicFromDB();
-  }, [fetchMusicFromDB]);
+    fetchUsersFromDB();
+  }, [fetchMusicFromDB, fetchUsersFromDB, musicOfStore]);
 
   // Стейт скрытия/показа и передачи сообщения в Alert.
   const [alertState, setAlertState] = useState({
@@ -48,21 +48,34 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     setAlertState({ ...alertState, isOpen: false });
   };
 
+  const [isFavorite, setFavorite] = useState(null);
+
   // Обработчик добавления товара в избранное и показа уведомления.
   const handleFavoriteAndShowAlert = (audioDetails) => {
-    // Достаем из стора поле isFavorite выбранного продукта.
-    const { isFavorite } = getAudioFileByIdOfTrack(audioDetails.id);
-
-    // Меняет состояние isFavorite у выбранного аудио файла.
     onToggleFavorite(audioDetails);
 
-    setAlertState({
-      isOpen: true,
-      title: "Info",
-      message: isFavorite
-        ? "Audio deleted from favorites."
-        : "Audio added from favorites.",
+    // Получаем текущего пользователя
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+
+    // Для отладки
+    console.log(
+      "isFavoritesAudio?",
+      currentUser?.favoritesAudio.includes(audioDetails.id)
+    );
+
+    // Проверяем, есть ли у него уже этот трек в избранных
+    setFavorite({
+      isFavorite: currentUser?.favoritesAudio.includes(audioDetails.id),
     });
+
+    currentUser &&
+      setAlertState({
+        isOpen: true,
+        title: "Info",
+        message: isFavorite
+          ? "Audio deleted from favorites."
+          : "Audio added from favorites.",
+      });
   };
 
   return (
@@ -74,6 +87,16 @@ const AudioCards = ({ handleRowDoubleClick }) => {
             !!musicOfStore.length &&
             musicOfStore
               .map((audioFile) => {
+                // Получаем текущего пользователя
+                const currentUser = JSON.parse(localStorage.getItem("user"));
+
+                // Если пользователь есть, то исправить избранные
+                if (currentUser) {
+                  audioFile.isFavorite = currentUser?.favoritesAudio.includes(
+                    audioFile.id
+                  );
+                }
+
                 return (
                   <AudioCard
                     key={audioFile.id}
@@ -90,6 +113,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
               musicOfStore={musicOfStore}
               headers={AUDIO__TEXTS}
               handleRowDoubleClick={handleRowDoubleClick}
+              handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
             />
           )}
         </div>
