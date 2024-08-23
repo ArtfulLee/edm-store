@@ -35,7 +35,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
   useEffect(() => {
     fetchMusicFromDB();
     fetchUsersFromDB();
-  }, [fetchMusicFromDB, fetchUsersFromDB, musicOfStore]);
+  }, [fetchMusicFromDB, fetchUsersFromDB]);
 
   // Стейт скрытия/показа и передачи сообщения в Alert.
   const [alertState, setAlertState] = useState({
@@ -81,7 +81,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
   return (
     <>
       <section className="AudioCards">
-        <div className="flex justify-between flex-wrap my-4">
+        <div className="flex justify-start flex-wrap md:gap-2 lg:gap-2.5 xl:gap-3">
           {/* Возвращаем карточки аудио файлов на Home page. */}
           {currentPathURL.pathname === "/" &&
             !!musicOfStore.length &&
