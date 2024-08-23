@@ -125,7 +125,7 @@ const Header = () => {
                     key={item?.path}
                     className={`${
                       isActiveLink(item?.path) ? "text-emerald-400" : ""
-                    } hover:text-emerald-400`}
+                    } hover:text-emerald-300 transition duration-100`}
                   >
                     {item?.name}
                   </NavLink>
@@ -161,25 +161,28 @@ const Header = () => {
             </button> */}
             <button
               type="button"
-              className="bg-transparent text-neutral-50  hover:text-emerald-400"
+              className="bg-transparent text-neutral-50  hover:text-emerald-400 transition duration-100"
             >
               <ShoppingCartIcon />
             </button>
 
             {/* Start Authorization. */}
-            <div id="buttons-wrapper" className="inline-flex items-center">
+            <div
+              id="buttons-wrapper"
+              className="inline-flex items-center space-x-2"
+            >
               {!user ? (
                 <>
                   <button
                     type="button"
                     onClick={() => setShowLoginModal(true)}
-                    className="border-2 border-emerald-400 text-emerald-400 font-semibold p-1"
+                    className="border-2 border-emerald-400 text-emerald-400 hover:border-emerald-300 hover:text-emerald-300 font-semibold p-1 transition duration-100"
                   >
                     Sing In
                   </button>
                   <button
                     type="button"
-                    className="border-2 border-emerald-400 bg-emerald-400 text-neutral-900 font-semibold p-1"
+                    className="border-2 border-emerald-400 bg-emerald-400 hover:border-emerald-300 hover:bg-emerald-300 text-neutral-900 font-semibold p-1 transition duration-100"
                     onClick={() => setShowRegisterModal(true)}
                   >
                     Sing Up
@@ -188,7 +191,7 @@ const Header = () => {
               ) : (
                 <button
                   type="button"
-                  className="border-2 border-emerald-400 bg-emerald-400 text-neutral-900 font-semibold p-1"
+                  className="border-2 border-emerald-400 bg-emerald-400 hover:border-emerald-300 hover:bg-emerald-300 text-neutral-900 font-semibold p-1 transition duration-100"
                   onClick={onLogout}
                 >
                   Logout
@@ -254,7 +257,7 @@ const Header = () => {
                   />
 
                   <button
-                    className="bg-emerald-400 text-neutral-900 font-semibold p-2"
+                    className="bg-emerald-400 hover:bg-emerald-300 text-neutral-900 font-semibold p-2"
                     type="submit"
                   >
                     Sing Up
@@ -291,7 +294,7 @@ const Header = () => {
                   />
 
                   <button
-                    className="bg-emerald-400 text-neutral-900 font-semibold p-2"
+                    className="bg-emerald-400 hover:bg-emerald-300 text-neutral-900 font-semibold p-2"
                     type="submit"
                   >
                     Sing in

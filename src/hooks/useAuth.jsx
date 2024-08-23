@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         );
       }
 
-      // Проверяем, существует ли уже суперпользователь.
+      // Проверяем, существует ли уже администратор.
       const adminExists = users?.some((user) => user?.role === "admin");
 
       // Определяем роль нового пользователя
@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }) => {
 };
 
 /**
- * Хук для доступа к контексту вутентификации
+ * Хук для доступа к контексту аутентификации
  * @returns {object} - Значение контекста
  */
 export const useAuth = () => {
