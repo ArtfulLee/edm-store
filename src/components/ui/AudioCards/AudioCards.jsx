@@ -107,6 +107,31 @@ const AudioCards = ({ handleRowDoubleClick }) => {
               })
               .reverse()}
 
+          {/* Возвращаем карточки аудио файлов на Favorites page. */}
+          {currentPathURL.pathname === "/favorites" &&
+            !!musicOfStore.length &&
+            musicOfStore.map((audioFile) => {
+              // Получаем текущего пользователя
+              const currentUser = JSON.parse(localStorage.getItem("user"));
+
+              // Если пользователь есть, то исправить избранные
+              if (currentUser) {
+                audioFile.isFavorite = currentUser?.favoritesAudio.includes(
+                  audioFile.id
+                );
+              }
+
+              if (audioFile.isFavorite) {
+                return (
+                  <AudioCard
+                    key={audioFile.id}
+                    audioDetails={audioFile}
+                    handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                  />
+                );
+              }
+            })}
+
           {/* Возвращаем карточки аудио файлов на Admin page. */}
           {currentPathURL.pathname === "/admin" && !!musicOfStore && (
             <Table
