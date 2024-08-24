@@ -24,9 +24,9 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     fetchMusicFromDB: state.fetchMusicFromDB,
   }));
 
-  const { fetchUsersFromDB, onToggleFavorite } = useUsersStore((state) => ({
-    fetchUsersFromDB: state.fetchUsersFromDB,
+  const { onToggleFavorite, addAudioToCart } = useUsersStore((state) => ({
     onToggleFavorite: state.onToggleFavorite,
+    addAudioToCart: state.addAudioToCart,
   }));
 
   // Получение текущего пути URL
@@ -34,8 +34,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
 
   useEffect(() => {
     fetchMusicFromDB();
-    fetchUsersFromDB();
-  }, [fetchMusicFromDB, fetchUsersFromDB]);
+  }, [fetchMusicFromDB]);
 
   // Стейт скрытия/показа и передачи сообщения в Alert.
   const [alertState, setAlertState] = useState({
@@ -57,12 +56,6 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     // Получаем текущего пользователя
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
-    // Для отладки
-    console.log(
-      "isFavoritesAudio?",
-      currentUser?.favoritesAudio.includes(audioDetails.id)
-    );
-
     // Проверяем, есть ли у него уже этот трек в избранных
     setFavorite({
       isFavorite: currentUser?.favoritesAudio.includes(audioDetails.id),
@@ -76,6 +69,14 @@ const AudioCards = ({ handleRowDoubleClick }) => {
           ? "Audio deleted from favorites."
           : "Audio added from favorites.",
       });
+  };
+
+  /**
+   * Обработчик добавления аудио файла в корзину
+   * @param {object} audioDetails
+   */
+  const handleAddAudioToCart = (audioDetails) => {
+    addAudioToCart(audioDetails.id);
   };
 
   return (
@@ -102,6 +103,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
                     key={audioFile.id}
                     audioDetails={audioFile}
                     handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleAddAudioToCart={handleAddAudioToCart}
                   />
                 );
               })
@@ -127,6 +129,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
                     key={audioFile.id}
                     audioDetails={audioFile}
                     handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleAddAudioToCart={handleAddAudioToCart}
                   />
                 );
               }
@@ -138,6 +141,16 @@ const AudioCards = ({ handleRowDoubleClick }) => {
               musicOfStore={musicOfStore}
               headers={AUDIO__TEXTS}
               handleRowDoubleClick={handleRowDoubleClick}
+              handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+            />
+          )}
+
+          {/* Возвращаем карточки аудио файлов на Cart page. */}
+          {currentPathURL.pathname === "/cart" && !!musicOfStore && (
+            <Table
+              currentPathURL={currentPathURL}
+              musicOfStore={musicOfStore}
+              headers={AUDIO__TEXTS}
               handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
             />
           )}

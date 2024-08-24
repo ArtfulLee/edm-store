@@ -20,7 +20,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  */
 const AudioCard = (props) => {
   const audioDetails = props.audioDetails;
-  const { handleFavoriteAndShowAlert } = props;
+  const { handleFavoriteAndShowAlert, handleAddAudioToCart } = props;
 
   /* **************************************** */
   // Обработчик нажатия кнопку Play на карточке аудио файла.
@@ -34,6 +34,13 @@ const AudioCard = (props) => {
     event.stopPropagation();
 
     handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioDetails);
+  };
+
+  const handleAudioToCart = (event) => {
+    // Предотвр. всплытие события.
+    event.stopPropagation();
+
+    handleAddAudioToCart && handleAddAudioToCart(audioDetails);
   };
 
   return (
@@ -85,7 +92,10 @@ const AudioCard = (props) => {
           </button>
           {/* End Кнопка добавления аудио файла в избранные. */}
           {/* start Кнопка для покупки аудио файла. */}
-          <button className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100">
+          <button
+            onClick={handleAudioToCart}
+            className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100"
+          >
             <div className="font-semibold">{audioDetails.price}</div>
             <ShoppingCartIcon fontSize="small" />
           </button>
