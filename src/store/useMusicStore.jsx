@@ -179,7 +179,7 @@ const useMusicStore = create((set, get) => ({
    * @param {string} audioDetails.numberOfSales - Количество продаж (WIP)
    * @returns
    */
-  onToggleFavorite: (audioDetails) =>
+/*   onToggleFavorite: (audioDetails) =>
     set((state) => {
       // Обновляем стор с корректным значением isFavorite у аудиофайлов.
       const updateMusicOfStore = state.musicOfStore.map((audioFile) => {
@@ -200,15 +200,15 @@ const useMusicStore = create((set, get) => ({
       );
 
       return { musicOfStore: updateMusicOfStore };
-    }),
+    }), */
 
   /**
    * Функция для получения избранных аудио файлов пользователя.
    * @returns {Array} Массив избранных аудио файлов.
    */
-  getFavoriteAudioFiles: () => (state) => {
+/*   getFavoriteAudioFiles: () => (state) => {
     return state.musicOfStore?.filter((audioFile) => audioFile?.isFavorite);
-  },
+  }, */
 
   /**
     Функция для получения аудио файла по id.
