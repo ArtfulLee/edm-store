@@ -106,7 +106,7 @@ const Header = () => {
           <div className="flex gap-x-16 items-center">
             <div className="edms-logo flex items-center space-x-2">
               <GraphicEqIcon className="text-neutral-50" />
-              <div className="text-neutral-50 font-bold text-lg">EDM STORE</div>
+              <h1 className="text-neutral-50 font-bold text-lg">EDM STORE</h1>
             </div>
 
             <nav className="flex text-neutral-50 space-x-8">
@@ -159,12 +159,18 @@ const Header = () => {
                 </span>
               )}
             </button> */}
-            <button
-              type="button"
-              className="bg-transparent text-neutral-50  hover:text-emerald-400 transition duration-100"
-            >
-              <ShoppingCartIcon />
-            </button>
+            <NavLink to="/cart" key="/cart">
+              <button
+                type="button"
+                className={`${
+                  isActiveLink("/cart")
+                    ? "text-emerald-400"
+                    : "text-neutral-50  "
+                } hover:text-emerald-300 transition duration-100`}
+              >
+                <ShoppingCartIcon />
+              </button>
+            </NavLink>
 
             {/* Start Authorization. */}
             <div
