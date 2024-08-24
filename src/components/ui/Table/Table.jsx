@@ -9,6 +9,7 @@ import TableRow from "./TableRow";
  * @returns {JSX.Element} Элемент JSX.
  */
 const Table = ({
+  currentPathURL,
   musicOfStore,
   headers,
   handleRowDoubleClick,
@@ -32,6 +33,11 @@ const Table = ({
           <div className="w-1/12 p-1 ">
             <p className="line-clamp-1">{headers.price}</p>
           </div>
+          {currentPathURL?.pathname === "/cart" && (
+            <div className="w-2/12 p-1 ">
+              <p className="line-clamp-1">{headers.cartActions}</p>
+            </div>
+          )}
         </div>
         {/* End Headers */}
 
@@ -50,6 +56,7 @@ const Table = ({
               return (
                 <TableRow
                   key={audioFile.id}
+                  currentPathURL={currentPathURL}
                   audioFile={audioFile}
                   handleRowDoubleClick={handleRowDoubleClick}
                   handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}

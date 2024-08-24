@@ -1,6 +1,7 @@
 //Иконки
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import CloseIcon from "@mui/icons-material/Close";
 
 /**
  * Компонент строка таблицы.
@@ -10,6 +11,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  * @returns {JSX.Element} Элемент JSX.
  */
 const TableRow = ({
+  currentPathURL,
   audioFile,
   handleRowDoubleClick,
   handleFavoriteAndShowAlert,
@@ -22,6 +24,8 @@ const TableRow = ({
   };
   return (
     <>
+
+
       <div
         className="flex w-full bg-neutral-700 hover:bg-neutral-600 transition duration-100"
         onDoubleClick={() => handleRowDoubleClick(audioFile)}
@@ -34,8 +38,11 @@ const TableRow = ({
           <button className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
             <PlayArrowIcon fontSize="large" />
           </button>
-          <button onClick={handleFavorite} className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
-          {audioFile.isFavorite ? (
+          <button
+            onClick={handleFavorite}
+            className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50"
+          >
+            {audioFile.isFavorite ? (
               <FavoriteIcon className="text-pink-500" />
             ) : (
               <FavoriteIcon />
@@ -56,6 +63,11 @@ const TableRow = ({
         <div className="flex items-center w-1/12 p-1">
           <p className="line-clamp-1">{audioFile.price}</p>
         </div>
+        {currentPathURL?.pathname === "/cart" && (
+          <div className="w-2/12 p-1 flex justify-center items-center hover:text-red-500 transition duration-100 cursor-pointer">
+            <CloseIcon />
+          </div>
+        )}
       </div>
     </>
   );
