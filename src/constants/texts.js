@@ -11,4 +11,5 @@ export const AUDIO__TEXTS = {
   genre: "Genre",
   label: "Label",
   numberOfSales: "Sales",
+  cartActions: "Cart actions"
 };
