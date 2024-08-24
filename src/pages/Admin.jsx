@@ -151,7 +151,7 @@ const Admin = () => {
   return (
     <>
       <div className="container flex mx-auto my-4 space-x-16">
-        <h1 className="text-2xl font-bold text-neutral-50">Audio data table</h1>
+        <h2 className="text-2xl font-bold text-neutral-50">Audio data table</h2>
         <button
           type="button"
           onClick={handleAddAudioFile}
