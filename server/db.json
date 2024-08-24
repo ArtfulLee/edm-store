@@ -141,7 +141,7 @@
       "artist": "Keith Mackenzie, Miggy",
       "genre": "Breaks",
       "label": "Play Me Records",
-      "isFavorite": true,
+      "isFavorite": false,
       "numberOfSales": 0
     }
   ],
@@ -156,7 +156,7 @@
       "role": "admin",
       "favoritesAudio": ["11", "9"],
       "boughtAudioFiles": ["0", "5"],
-      "cart": []
+      "audioFromCart": []
     },
     {
       "id": "02",
@@ -168,7 +168,7 @@
       "role": "user",
       "favoritesAudio": ["10", "8"],
       "boughtAudioFiles": ["1", "3"],
-      "cart": []
+      "audioFromCart": []
     }
   ]
 }
