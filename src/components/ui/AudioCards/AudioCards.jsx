@@ -13,12 +13,13 @@ import useUsersStore from "../../../store/useUsersStore";
 
 //constants
 import { AUDIO__TEXTS } from "../../../constants/texts";
+import { ALERT__TEXTS } from "../../../constants/alertTexts";
 
 /**
  * Отрисовка карточек.
  * @returns {JSX.Element} Элемент JSX.
  */
-const AudioCards = ({ handleRowDoubleClick }) => {
+const AudioCards = ({ handleRowDoubleClick, handleDeleteAudioFromCart }) => {
   const { musicOfStore, fetchMusicFromDB } = useMusicStore((state) => ({
     musicOfStore: state.musicOfStore,
     fetchMusicFromDB: state.fetchMusicFromDB,
@@ -39,7 +40,8 @@ const AudioCards = ({ handleRowDoubleClick }) => {
   // Стейт скрытия/показа и передачи сообщения в Alert.
   const [alertState, setAlertState] = useState({
     isOpen: false,
-    message: "",
+    title: "",
+    subtitle: "",
   });
 
   // Обработчик для стейт скрытия/показа и передачи сообщения в Alert.
@@ -47,6 +49,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     setAlertState({ ...alertState, isOpen: false });
   };
 
+  // Стейт для отслеживания состояния "Избранное"
   const [isFavorite, setFavorite] = useState(null);
 
   // Обработчик добавления товара в избранное и показа уведомления.
@@ -57,17 +60,15 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
     // Проверяем, есть ли у него уже этот трек в избранных
-    setFavorite({
-      isFavorite: currentUser?.favoritesAudio.includes(audioDetails.id),
-    });
+    setFavorite(currentUser?.favoritesAudio.includes(audioDetails.id));
 
     currentUser &&
       setAlertState({
         isOpen: true,
-        title: "Info",
-        message: isFavorite
-          ? "Audio deleted from favorites."
-          : "Audio added from favorites.",
+        title: "Favorites",
+        subtitle: isFavorite
+          ? "The audio has been deleted from favorites."
+          : "The audio has been added from favorites.",
       });
   };
 
@@ -76,7 +77,27 @@ const AudioCards = ({ handleRowDoubleClick }) => {
    * @param {object} audioDetails
    */
   const handleAddAudioToCart = (audioDetails) => {
+    // Получаем текущего пользователя
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+
     addAudioToCart(audioDetails.id);
+
+    // Для отладки
+    console.log(currentUser.audioFromCart.includes(audioDetails.id));
+
+    if (currentUser.audioFromCart.includes(audioDetails.id)) {
+      setAlertState({
+        isOpen: true,
+        title: ALERT__TEXTS.addAudioFileToCart.title,
+        subtitle: ALERT__TEXTS.addAudioFileToCart.subtitleTwo,
+      });
+    } else {
+      setAlertState({
+        isOpen: true,
+        title: ALERT__TEXTS.addAudioFileToCart.title,
+        subtitle: ALERT__TEXTS.addAudioFileToCart.subtitle,
+      });
+    }
   };
 
   return (
@@ -138,6 +159,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
           {/* Возвращаем карточки аудио файлов на Admin page. */}
           {currentPathURL.pathname === "/admin" && !!musicOfStore && (
             <Table
+              currentPathURL={currentPathURL}
               musicOfStore={musicOfStore}
               headers={AUDIO__TEXTS}
               handleRowDoubleClick={handleRowDoubleClick}
@@ -152,6 +174,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
               musicOfStore={musicOfStore}
               headers={AUDIO__TEXTS}
               handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+              handleDeleteAudioFromCart={handleDeleteAudioFromCart}
             />
           )}
         </div>
@@ -159,8 +182,8 @@ const AudioCards = ({ handleRowDoubleClick }) => {
 
       <Alert
         title={alertState?.title}
-        subtitle={alertState?.message}
-        variant="info"
+        subtitle={alertState?.subtitle}
+        variant="neutral"
         isOpen={alertState?.isOpen}
         onClose={handleCloseAlert}
       />

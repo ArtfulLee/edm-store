@@ -8,7 +8,8 @@ import useUsersStore from "../store/useUsersStore";
 import Alert from "../components/ui/Alert/Alert";
 import AudioCards from "../components/ui/AudioCards/AudioCards";
 
-// icons
+// constants
+import { ALERT__TEXTS } from "../constants/alertTexts";
 
 /**
  * Компонент корзина
@@ -16,23 +17,22 @@ import AudioCards from "../components/ui/AudioCards/AudioCards";
  */
 const Cart = () => {
   // Получение данных из стора (корзина товаров)
-  const { audioFromCart, getAudioFromCart, deleteAudioFromCart } =
-    useUsersStore((state) => ({
-      audioFromCart: state.audioFromCart,
-      getAudioFromCart: state.getAudioFromCart,
-      deleteAudioFromCart: state.deleteAudioFromCart,
-    }));
+  const { deleteAudioFromCart } = useUsersStore((state) => ({
+    audioFromCart: state.audioFromCart,
+    getAudioFromCart: state.getAudioFromCart,
+    deleteAudioFromCart: state.deleteAudioFromCart,
+  }));
 
   /**
    * Обработчик для удаления товара из корзины
-   * @param {string} productId - id товара, который нужно удалить.
+   * @param {string} audioId - id товара, который нужно удалить.
    */
-  const handleDeleteProduct = (productId) => {
-    deleteAudioFromCart(productId);
+  const handleDeleteAudioFromCart = (audioId) => {
+    deleteAudioFromCart(audioId);
     setAlertState({
       isOpen: true,
-      title: "Удаление товара",
-      subtitle: "Товар был удален из корзины.",
+      title: ALERT__TEXTS.deleteAudioFileFromCart.title,
+      subtitle: ALERT__TEXTS.deleteAudioFileFromCart.subtitle,
     });
   };
 
@@ -46,11 +46,9 @@ const Cart = () => {
   return (
     <>
       <div className="container mx-auto my-4">
-        <h2 className="text-2xl font-bold text-neutral-50">
-          My cart
-        </h2>
+        <h2 className="text-2xl font-bold text-neutral-50">My cart</h2>
       </div>
-      <AudioCards />
+      <AudioCards handleDeleteAudioFromCart={handleDeleteAudioFromCart} />
 
       <Alert
         title={alertState?.title}

@@ -1,7 +1,10 @@
-//Иконки
+// icons
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
+// constants
+import { AUDIO__TEXTS } from "../../../constants/texts";
 
 /**
  * Компонент карточка
@@ -96,7 +99,7 @@ const AudioCard = (props) => {
             onClick={handleAudioToCart}
             className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100"
           >
-            <div className="font-semibold">{audioDetails.price}</div>
+            <div className="font-semibold">{audioDetails.price}{AUDIO__TEXTS.currency}</div>
             <ShoppingCartIcon fontSize="small" />
           </button>
           {/* End Кнопка для покупки аудио файла. */}

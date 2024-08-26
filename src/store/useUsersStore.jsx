@@ -96,9 +96,9 @@ const useUsersStore = create((set) => ({
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
     // Обновляем массив идентификаторов товаров с учетом удаляемого ид.
-    currentUser.audioFromCart = currentUser.audioFromCart.map(
-      (id) => idFromCart !== id
-    );
+    currentUser.audioFromCart = currentUser.audioFromCart.filter((id) => {
+      if (idFromCart !== id) return id;
+    });
 
     // Обновляем пользователя с localStorage.
     localStorage.setItem("user", JSON.stringify(currentUser));

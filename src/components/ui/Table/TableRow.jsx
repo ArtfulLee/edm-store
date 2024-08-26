@@ -1,7 +1,10 @@
-//Иконки
+// icons
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CloseIcon from "@mui/icons-material/Close";
+
+//constants
+import { AUDIO__TEXTS } from "../../../constants/texts";
 
 /**
  * Компонент строка таблицы.
@@ -15,6 +18,7 @@ const TableRow = ({
   audioFile,
   handleRowDoubleClick,
   handleFavoriteAndShowAlert,
+  handleDeleteAudioFromCart,
 }) => {
   const handleFavorite = (event) => {
     // Предотвр. всплытие события.
@@ -24,8 +28,6 @@ const TableRow = ({
   };
   return (
     <>
-
-
       <div
         className="flex w-full bg-neutral-700 hover:bg-neutral-600 transition duration-100"
         onDoubleClick={() => handleRowDoubleClick(audioFile)}
@@ -61,11 +63,14 @@ const TableRow = ({
           <p className="line-clamp-1">{audioFile.label}</p>
         </div>
         <div className="flex items-center w-1/12 p-1">
-          <p className="line-clamp-1">{audioFile.price}</p>
+          <p className="line-clamp-1">{audioFile.price}{AUDIO__TEXTS.currency}</p>
         </div>
         {currentPathURL?.pathname === "/cart" && (
-          <div className="w-2/12 p-1 flex justify-center items-center hover:text-red-500 transition duration-100 cursor-pointer">
-            <CloseIcon />
+          <div className="w-1/12 p-1 flex justify-center items-center">
+            <CloseIcon
+              className="hover:text-red-500 transition duration-100 cursor-pointer"
+              onClick={() => handleDeleteAudioFromCart(audioFile.id)}
+            />
           </div>
         )}
       </div>
