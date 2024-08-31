@@ -100,7 +100,7 @@ const AudioCards = ({ handleRowDoubleClick, handleDeleteAudioFromCart }) => {
   return (
     <>
       <section className="AudioCards">
-        <div className="flex justify-start flex-wrap md:gap-2 lg:gap-2.5 xl:gap-3">
+        <div className="flex justify-start flex-wrap md:gap-2 lg:gap-2.5 xl:gap-3 mb-4">
           {/* Возвращаем карточки аудио файлов на Home page. */}
           {currentPathURL.pathname === "/" &&
             !!musicOfStore.length &&

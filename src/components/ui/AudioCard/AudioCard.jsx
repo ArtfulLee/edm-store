@@ -48,7 +48,7 @@ const AudioCard = (props) => {
 
   return (
     <>
-      <div className="bg-neutral-700 max-w-full md:max-w-60 p-2 mb-4">
+      <div className="bg-neutral-700 max-w-full md:max-w-60 p-2">
         {/* Start Обложка аудио файла + элементы управления. */}
         <div className="group relative">
           <img
@@ -99,7 +99,10 @@ const AudioCard = (props) => {
             onClick={handleAudioToCart}
             className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100"
           >
-            <div className="font-semibold">{audioDetails.price}{AUDIO__TEXTS.currency}</div>
+            <div className="font-semibold">
+              {audioDetails.price}
+              {AUDIO__TEXTS.currency}
+            </div>
             <ShoppingCartIcon fontSize="small" />
           </button>
           {/* End Кнопка для покупки аудио файла. */}
