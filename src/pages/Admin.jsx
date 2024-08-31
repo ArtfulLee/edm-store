@@ -67,9 +67,6 @@ const Admin = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    // Для отладки
-    console.log(selectedValue);
-
     if (selectedValue) {
       // Если товар выбран, редактируем его
       editAudioFileOfStore(selectedValue?.id, {

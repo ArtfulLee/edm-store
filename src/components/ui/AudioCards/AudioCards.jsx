@@ -82,10 +82,7 @@ const AudioCards = ({ handleRowDoubleClick, handleDeleteAudioFromCart }) => {
 
     addAudioToCart(audioDetails.id);
 
-    // Для отладки
-    console.log(currentUser.audioFromCart.includes(audioDetails.id));
-
-    if (currentUser.audioFromCart.includes(audioDetails.id)) {
+    if (currentUser?.audioFromCart.includes(audioDetails.id)) {
       setAlertState({
         isOpen: true,
         title: ALERT__TEXTS.addAudioFileToCart.title,
