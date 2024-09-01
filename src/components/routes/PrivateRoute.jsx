@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth"; 
+import { useAuth } from "../../hooks/useAuth";
 
 /**
  * Компонент для защищенного роута.
@@ -9,7 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
  * @returns {JSX.Element} - Компонент.
  */
 const PrivateRoute = ({ element, requiredRole }) => {
-  const { user } = useAuth(); 
+  const { user } = useAuth();
 
   if (!user) {
     // Пользователь не авторизован, перенаправляем на страницу входа.
