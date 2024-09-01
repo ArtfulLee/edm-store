@@ -19,8 +19,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const navItems = [
   { name: "Home", path: "/" },
   { name: "Favorites", path: "/favorites" },
-  { name: "Admin", path: "/admin" },
   { name: "Downloads", path: "/downloads" },
+  { name: "Admin", path: "/admin" },
 ];
 
 /**
@@ -116,6 +116,14 @@ const Header = () => {
                 if (
                   item?.name === "Admin" &&
                   (!user || user?.role !== "admin")
+                ) {
+                  return null;
+                }
+
+                // Скрыть пункт меню "Favorites" и "Downloads" если пользователь не авторизован
+                if (
+                  (item?.name === "Favorites" || item?.name === "Downloads") &&
+                  !user
                 ) {
                   return null;
                 }
