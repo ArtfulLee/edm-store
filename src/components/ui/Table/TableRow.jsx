@@ -2,6 +2,7 @@
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CloseIcon from "@mui/icons-material/Close";
+import DownloadIcon from "@mui/icons-material/Download";
 
 //constants
 import { AUDIO__TEXTS } from "../../../constants/texts";
@@ -26,6 +27,7 @@ const TableRow = ({
 
     handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioFile);
   };
+
   return (
     <>
       <div
@@ -63,14 +65,26 @@ const TableRow = ({
           <p className="line-clamp-1">{audioFile.label}</p>
         </div>
         <div className="flex items-center w-1/12 p-1">
-          <p className="line-clamp-1">{audioFile.price}{AUDIO__TEXTS.currency}</p>
+          <p className="line-clamp-1">
+            {audioFile.price}
+            {AUDIO__TEXTS.currency}
+          </p>
         </div>
         {currentPathURL?.pathname === "/cart" && (
           <div className="w-1/12 p-1 flex justify-center items-center">
-            <CloseIcon
+            <button
               className="hover:text-red-500 transition duration-100 cursor-pointer"
               onClick={() => handleDeleteAudioFromCart(audioFile.id)}
-            />
+            >
+              <CloseIcon />
+            </button>
+          </div>
+        )}
+        {currentPathURL?.pathname === "/downloads" && (
+          <div className="w-1/12 p-1 flex justify-center items-center">
+            <button className="hover:text-sky-500 transition duration-100 cursor-pointer">
+              <DownloadIcon />
+            </button>
           </div>
         )}
       </div>

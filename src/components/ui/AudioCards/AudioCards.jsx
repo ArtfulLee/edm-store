@@ -174,6 +174,16 @@ const AudioCards = ({ handleRowDoubleClick, handleDeleteAudioFromCart }) => {
               handleDeleteAudioFromCart={handleDeleteAudioFromCart}
             />
           )}
+
+          {/* Возвращаем карточки аудио файлов на Download page. */}
+          {currentPathURL.pathname === "/downloads" && !!musicOfStore && (
+            <Table
+              currentPathURL={currentPathURL}
+              musicOfStore={musicOfStore}
+              headers={AUDIO__TEXTS}
+              handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+            />
+          )}
         </div>
       </section>
 

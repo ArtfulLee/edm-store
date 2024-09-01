@@ -1,9 +1,6 @@
 // components
 import TableRow from "./TableRow";
 
-// constants
-import { AUDIO__TEXTS } from "../../../constants/texts";
-
 /**
  * Компонент таблицы.
  * @param {object} props - Свойства компонента.
@@ -22,9 +19,14 @@ const Table = ({
   // Получаем текущего пользователя.
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  // Переменная для хранения аудио для корзины.
+  // Переменная для хранения аудио для Cart page.
   const audioForCartPage = musicOfStore.filter((audioFile) =>
     currentUser?.audioFromCart.includes(audioFile.id)
+  );
+
+  // Переменная для хранения аудио для Downloads page.
+  const audioForDownloadsPage = musicOfStore.filter((audioFile) =>
+    currentUser?.boughtAudioFiles.includes(audioFile.id)
   );
 
   return (
@@ -43,9 +45,10 @@ const Table = ({
             <p className="line-clamp-1">{headers.label}</p>
           </div>
           <div className="w-1/12 p-1 ">
-            <p className="line-clamp-1">{headers.price}{AUDIO__TEXTS.currency}</p>
+            <p className="line-clamp-1">{headers.price}</p>
           </div>
-          {currentPathURL?.pathname === "/cart" && (
+          {(currentPathURL?.pathname === "/cart" ||
+            currentPathURL?.pathname === "/downloads") && (
             <div className="w-1/12 p-1 ">
               <p className="line-clamp-1">{headers.cartActions}</p>
             </div>
@@ -53,7 +56,7 @@ const Table = ({
         </div>
         {/* End Headers */}
 
-        {/* Для Favorites page */}
+        {/* Для Admin page */}
         {!!musicOfStore &&
           currentPathURL?.pathname === "/admin" &&
           musicOfStore
@@ -81,6 +84,31 @@ const Table = ({
         {!!audioForCartPage &&
           currentPathURL?.pathname === "/cart" &&
           audioForCartPage
+            .map((audioFile) => {
+              // Если пользователь есть, то исправить избранные
+              if (currentUser) {
+                audioFile.isFavorite = currentUser?.favoritesAudio.includes(
+                  audioFile.id
+                );
+
+                return (
+                  <TableRow
+                    key={audioFile.id}
+                    currentPathURL={currentPathURL}
+                    audioFile={audioFile}
+                    handleRowDoubleClick={handleRowDoubleClick}
+                    handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleDeleteAudioFromCart={handleDeleteAudioFromCart}
+                  />
+                );
+              }
+            })
+            .reverse()}
+
+        {/* Для Downloads page */}
+        {!!audioForDownloadsPage &&
+          currentPathURL?.pathname === "/downloads" &&
+          audioForDownloadsPage
             .map((audioFile) => {
               // Если пользователь есть, то исправить избранные
               if (currentUser) {
