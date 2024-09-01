@@ -1,4 +1,7 @@
+// react
 import { Outlet } from "react-router-dom";
+
+// components
 import Header from "../components/ui/Header/Header";
 import Footer from "../components/ui/Footer/Footer";
 import AudioPlayer from "../components/AudioPlayer/AudioPlayer";
