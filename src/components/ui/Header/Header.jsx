@@ -1,6 +1,6 @@
 // React
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 // components
 import useForm from "../../../hooks/useForm";
@@ -204,13 +204,15 @@ const Header = () => {
                   </button>
                 </>
               ) : (
-                <button
-                  type="button"
-                  className="border-2 border-emerald-400 bg-emerald-400 hover:border-emerald-300 hover:bg-emerald-300 text-neutral-900 font-semibold p-1 transition duration-100"
-                  onClick={onLogout}
-                >
-                  Logout
-                </button>
+                <Link to="/">
+                  <button
+                    type="button"
+                    className="border-2 border-emerald-400 bg-emerald-400 hover:border-emerald-300 hover:bg-emerald-300 text-neutral-900 font-semibold p-1 transition duration-100"
+                    onClick={onLogout}
+                  >
+                    Logout
+                  </button>
+                </Link>
               )}
             </div>
             {showRegisterModal && (
