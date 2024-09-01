@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }) => {
         role: adminExists ? "user" : "admin",
         favoritesAudio: [],
         boughtAudioFiles: [],
+        audioFromCart: [],
       };
 
       // Отправка запроса на создание нового пользователя.

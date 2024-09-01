@@ -49,8 +49,12 @@ const Admin = () => {
 
   // Обработка данных формы.
   const { formValues, handleInput, resetForm } = useForm({
-    name: "",
-    category: "",
+    artist: "",
+    title: "",
+    genre: "",
+    audioSrc: "",
+    imgSrc: "",
+    label: "",
     price: "",
   });
 
@@ -65,7 +69,15 @@ const Admin = () => {
 
     if (selectedValue) {
       // Если товар выбран, редактируем его
-      editAudioFileOfStore(selectedValue?.id, formValues);
+      editAudioFileOfStore(selectedValue?.id, {
+        artist: formValues?.artist || selectedValue?.artist,
+        title: formValues?.title || selectedValue?.title,
+        genre: formValues?.genre || selectedValue?.genre,
+        audioSrc: formValues?.audioSrc || selectedValue?.audioSrc,
+        imgSrc: formValues?.imgSrc || selectedValue?.imgSrc,
+        label: formValues?.label || selectedValue?.label,
+        price: formValues?.price || selectedValue?.price,
+      });
 
       setAlertData({
         title: ALERT__TEXTS.editAudioFileOfStore.title,
@@ -151,7 +163,7 @@ const Admin = () => {
   return (
     <>
       <div className="container flex mx-auto my-4 space-x-16">
-        <h1 className="text-2xl font-bold text-neutral-50">Audio data table</h1>
+        <h2 className="text-2xl font-bold text-neutral-50">Audio data table</h2>
         <button
           type="button"
           onClick={handleAddAudioFile}

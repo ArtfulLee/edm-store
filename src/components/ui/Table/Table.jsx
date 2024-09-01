@@ -9,11 +9,26 @@ import TableRow from "./TableRow";
  * @returns {JSX.Element} Элемент JSX.
  */
 const Table = ({
+  currentPathURL,
   musicOfStore,
   headers,
   handleRowDoubleClick,
   handleFavoriteAndShowAlert,
+  handleDeleteAudioFromCart,
 }) => {
+  // Получаем текущего пользователя.
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  // Переменная для хранения аудио для Cart page.
+  const audioForCartPage = musicOfStore.filter((audioFile) =>
+    currentUser?.audioFromCart.includes(audioFile.id)
+  );
+
+  // Переменная для хранения аудио для Downloads page.
+  const audioForDownloadsPage = musicOfStore.filter((audioFile) =>
+    currentUser?.boughtAudioFiles.includes(audioFile.id)
+  );
+
   return (
     <>
       <div className="flex flex-col w-full space-y-1 text-neutral-50">
@@ -32,15 +47,20 @@ const Table = ({
           <div className="w-1/12 p-1 ">
             <p className="line-clamp-1">{headers.price}</p>
           </div>
+          {(currentPathURL?.pathname === "/cart" ||
+            currentPathURL?.pathname === "/downloads") && (
+            <div className="w-1/12 p-1 ">
+              <p className="line-clamp-1">{headers.cartActions}</p>
+            </div>
+          )}
         </div>
         {/* End Headers */}
 
+        {/* Для Admin page */}
         {!!musicOfStore &&
+          currentPathURL?.pathname === "/admin" &&
           musicOfStore
             .map((audioFile) => {
-              // Получаем текущего пользователя
-              const currentUser = JSON.parse(localStorage.getItem("user"));
-
               // Если пользователь есть, то исправить избранные
               if (currentUser) {
                 audioFile.isFavorite = currentUser?.favoritesAudio.includes(
@@ -50,11 +70,63 @@ const Table = ({
               return (
                 <TableRow
                   key={audioFile.id}
+                  currentPathURL={currentPathURL}
                   audioFile={audioFile}
                   handleRowDoubleClick={handleRowDoubleClick}
                   handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                  handleDeleteAudioFromCart={handleDeleteAudioFromCart}
                 />
               );
+            })
+            .reverse()}
+
+        {/* Для Cart page */}
+        {!!audioForCartPage &&
+          currentPathURL?.pathname === "/cart" &&
+          audioForCartPage
+            .map((audioFile) => {
+              // Если пользователь есть, то исправить избранные
+              if (currentUser) {
+                audioFile.isFavorite = currentUser?.favoritesAudio.includes(
+                  audioFile.id
+                );
+
+                return (
+                  <TableRow
+                    key={audioFile.id}
+                    currentPathURL={currentPathURL}
+                    audioFile={audioFile}
+                    handleRowDoubleClick={handleRowDoubleClick}
+                    handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleDeleteAudioFromCart={handleDeleteAudioFromCart}
+                  />
+                );
+              }
+            })
+            .reverse()}
+
+        {/* Для Downloads page */}
+        {!!audioForDownloadsPage &&
+          currentPathURL?.pathname === "/downloads" &&
+          audioForDownloadsPage
+            .map((audioFile) => {
+              // Если пользователь есть, то исправить избранные
+              if (currentUser) {
+                audioFile.isFavorite = currentUser?.favoritesAudio.includes(
+                  audioFile.id
+                );
+
+                return (
+                  <TableRow
+                    key={audioFile.id}
+                    currentPathURL={currentPathURL}
+                    audioFile={audioFile}
+                    handleRowDoubleClick={handleRowDoubleClick}
+                    handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleDeleteAudioFromCart={handleDeleteAudioFromCart}
+                  />
+                );
+              }
             })
             .reverse()}
       </div>

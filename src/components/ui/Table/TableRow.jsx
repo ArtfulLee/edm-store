@@ -1,6 +1,11 @@
-//Иконки
+// icons
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import CloseIcon from "@mui/icons-material/Close";
+import DownloadIcon from "@mui/icons-material/Download";
+
+//constants
+import { AUDIO__TEXTS } from "../../../constants/texts";
 
 /**
  * Компонент строка таблицы.
@@ -10,9 +15,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  * @returns {JSX.Element} Элемент JSX.
  */
 const TableRow = ({
+  currentPathURL,
   audioFile,
   handleRowDoubleClick,
   handleFavoriteAndShowAlert,
+  handleDeleteAudioFromCart,
 }) => {
   const handleFavorite = (event) => {
     // Предотвр. всплытие события.
@@ -20,6 +27,7 @@ const TableRow = ({
 
     handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioFile);
   };
+
   return (
     <>
       <div
@@ -34,8 +42,11 @@ const TableRow = ({
           <button className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
             <PlayArrowIcon fontSize="large" />
           </button>
-          <button onClick={handleFavorite} className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50">
-          {audioFile.isFavorite ? (
+          <button
+            onClick={handleFavorite}
+            className="transition duration-100 w-10 aspect-square text-neutral-400 hover:text-neutral-50"
+          >
+            {audioFile.isFavorite ? (
               <FavoriteIcon className="text-pink-500" />
             ) : (
               <FavoriteIcon />
@@ -54,8 +65,28 @@ const TableRow = ({
           <p className="line-clamp-1">{audioFile.label}</p>
         </div>
         <div className="flex items-center w-1/12 p-1">
-          <p className="line-clamp-1">{audioFile.price}</p>
+          <p className="line-clamp-1">
+            {audioFile.price}
+            {AUDIO__TEXTS.currency}
+          </p>
         </div>
+        {currentPathURL?.pathname === "/cart" && (
+          <div className="w-1/12 p-1 flex justify-center items-center">
+            <button
+              className="hover:text-red-500 transition duration-100 cursor-pointer"
+              onClick={() => handleDeleteAudioFromCart(audioFile.id)}
+            >
+              <CloseIcon />
+            </button>
+          </div>
+        )}
+        {currentPathURL?.pathname === "/downloads" && (
+          <div className="w-1/12 p-1 flex justify-center items-center">
+            <button className="hover:text-sky-500 transition duration-100 cursor-pointer">
+              <DownloadIcon />
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

@@ -1,7 +1,10 @@
-//Иконки
+// icons
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
+// constants
+import { AUDIO__TEXTS } from "../../../constants/texts";
 
 /**
  * Компонент карточка
@@ -20,7 +23,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
  */
 const AudioCard = (props) => {
   const audioDetails = props.audioDetails;
-  const { handleFavoriteAndShowAlert } = props;
+  const { handleFavoriteAndShowAlert, handleAddAudioToCart } = props;
 
   /* **************************************** */
   // Обработчик нажатия кнопку Play на карточке аудио файла.
@@ -36,9 +39,16 @@ const AudioCard = (props) => {
     handleFavoriteAndShowAlert && handleFavoriteAndShowAlert(audioDetails);
   };
 
+  const handleAudioToCart = (event) => {
+    // Предотвр. всплытие события.
+    event.stopPropagation();
+
+    handleAddAudioToCart && handleAddAudioToCart(audioDetails);
+  };
+
   return (
     <>
-      <div className="bg-neutral-700 max-w-full md:max-w-60 p-2 mb-4">
+      <div className="bg-neutral-700 max-w-full md:max-w-60 p-2">
         {/* Start Обложка аудио файла + элементы управления. */}
         <div className="group relative">
           <img
@@ -85,8 +95,14 @@ const AudioCard = (props) => {
           </button>
           {/* End Кнопка добавления аудио файла в избранные. */}
           {/* start Кнопка для покупки аудио файла. */}
-          <button className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100">
-            <div className="font-semibold">{audioDetails.price}</div>
+          <button
+            onClick={handleAudioToCart}
+            className="flex items-center justify-center space-x-2 line-clamp-1 p-1 text-neutral-50 bg-pink-500 border-2 border-pink-500 hover:bg-pink-400 hover:border-pink-400 transition duration-100"
+          >
+            <div className="font-semibold">
+              {audioDetails.price}
+              {AUDIO__TEXTS.currency}
+            </div>
             <ShoppingCartIcon fontSize="small" />
           </button>
           {/* End Кнопка для покупки аудио файла. */}

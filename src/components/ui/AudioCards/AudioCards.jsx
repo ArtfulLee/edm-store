@@ -13,20 +13,21 @@ import useUsersStore from "../../../store/useUsersStore";
 
 //constants
 import { AUDIO__TEXTS } from "../../../constants/texts";
+import { ALERT__TEXTS } from "../../../constants/alertTexts";
 
 /**
  * Отрисовка карточек.
  * @returns {JSX.Element} Элемент JSX.
  */
-const AudioCards = ({ handleRowDoubleClick }) => {
+const AudioCards = ({ handleRowDoubleClick, handleDeleteAudioFromCart }) => {
   const { musicOfStore, fetchMusicFromDB } = useMusicStore((state) => ({
     musicOfStore: state.musicOfStore,
     fetchMusicFromDB: state.fetchMusicFromDB,
   }));
 
-  const { fetchUsersFromDB, onToggleFavorite } = useUsersStore((state) => ({
-    fetchUsersFromDB: state.fetchUsersFromDB,
+  const { onToggleFavorite, addAudioToCart } = useUsersStore((state) => ({
     onToggleFavorite: state.onToggleFavorite,
+    addAudioToCart: state.addAudioToCart,
   }));
 
   // Получение текущего пути URL
@@ -34,13 +35,13 @@ const AudioCards = ({ handleRowDoubleClick }) => {
 
   useEffect(() => {
     fetchMusicFromDB();
-    fetchUsersFromDB();
-  }, [fetchMusicFromDB, fetchUsersFromDB]);
+  }, [fetchMusicFromDB]);
 
   // Стейт скрытия/показа и передачи сообщения в Alert.
   const [alertState, setAlertState] = useState({
     isOpen: false,
-    message: "",
+    title: "",
+    subtitle: "",
   });
 
   // Обработчик для стейт скрытия/показа и передачи сообщения в Alert.
@@ -48,6 +49,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     setAlertState({ ...alertState, isOpen: false });
   };
 
+  // Стейт для отслеживания состояния "Избранное"
   const [isFavorite, setFavorite] = useState(null);
 
   // Обработчик добавления товара в избранное и показа уведомления.
@@ -57,31 +59,48 @@ const AudioCards = ({ handleRowDoubleClick }) => {
     // Получаем текущего пользователя
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
-    // Для отладки
-    console.log(
-      "isFavoritesAudio?",
-      currentUser?.favoritesAudio.includes(audioDetails.id)
-    );
-
     // Проверяем, есть ли у него уже этот трек в избранных
-    setFavorite({
-      isFavorite: currentUser?.favoritesAudio.includes(audioDetails.id),
-    });
+    setFavorite(currentUser?.favoritesAudio.includes(audioDetails.id));
 
     currentUser &&
       setAlertState({
         isOpen: true,
-        title: "Info",
-        message: isFavorite
-          ? "Audio deleted from favorites."
-          : "Audio added from favorites.",
+        title: "Favorites",
+        subtitle: isFavorite
+          ? "The audio has been deleted from favorites."
+          : "The audio has been added from favorites.",
       });
+  };
+
+  /**
+   * Обработчик добавления аудио файла в корзину
+   * @param {object} audioDetails
+   */
+  const handleAddAudioToCart = (audioDetails) => {
+    // Получаем текущего пользователя
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+
+    addAudioToCart(audioDetails.id);
+
+    if (currentUser?.audioFromCart.includes(audioDetails.id)) {
+      setAlertState({
+        isOpen: true,
+        title: ALERT__TEXTS.addAudioFileToCart.title,
+        subtitle: ALERT__TEXTS.addAudioFileToCart.subtitleTwo,
+      });
+    } else {
+      setAlertState({
+        isOpen: true,
+        title: ALERT__TEXTS.addAudioFileToCart.title,
+        subtitle: ALERT__TEXTS.addAudioFileToCart.subtitle,
+      });
+    }
   };
 
   return (
     <>
       <section className="AudioCards">
-        <div className="flex justify-start flex-wrap md:gap-2 lg:gap-2.5 xl:gap-3">
+        <div className="flex justify-start flex-wrap md:gap-2 lg:gap-2.5 xl:gap-3 mb-4">
           {/* Возвращаем карточки аудио файлов на Home page. */}
           {currentPathURL.pathname === "/" &&
             !!musicOfStore.length &&
@@ -102,6 +121,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
                     key={audioFile.id}
                     audioDetails={audioFile}
                     handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleAddAudioToCart={handleAddAudioToCart}
                   />
                 );
               })
@@ -127,6 +147,7 @@ const AudioCards = ({ handleRowDoubleClick }) => {
                     key={audioFile.id}
                     audioDetails={audioFile}
                     handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+                    handleAddAudioToCart={handleAddAudioToCart}
                   />
                 );
               }
@@ -135,9 +156,31 @@ const AudioCards = ({ handleRowDoubleClick }) => {
           {/* Возвращаем карточки аудио файлов на Admin page. */}
           {currentPathURL.pathname === "/admin" && !!musicOfStore && (
             <Table
+              currentPathURL={currentPathURL}
               musicOfStore={musicOfStore}
               headers={AUDIO__TEXTS}
               handleRowDoubleClick={handleRowDoubleClick}
+              handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+            />
+          )}
+
+          {/* Возвращаем карточки аудио файлов на Cart page. */}
+          {currentPathURL.pathname === "/cart" && !!musicOfStore && (
+            <Table
+              currentPathURL={currentPathURL}
+              musicOfStore={musicOfStore}
+              headers={AUDIO__TEXTS}
+              handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
+              handleDeleteAudioFromCart={handleDeleteAudioFromCart}
+            />
+          )}
+
+          {/* Возвращаем карточки аудио файлов на Download page. */}
+          {currentPathURL.pathname === "/downloads" && !!musicOfStore && (
+            <Table
+              currentPathURL={currentPathURL}
+              musicOfStore={musicOfStore}
+              headers={AUDIO__TEXTS}
               handleFavoriteAndShowAlert={handleFavoriteAndShowAlert}
             />
           )}
@@ -146,8 +189,8 @@ const AudioCards = ({ handleRowDoubleClick }) => {
 
       <Alert
         title={alertState?.title}
-        subtitle={alertState?.message}
-        variant="info"
+        subtitle={alertState?.subtitle}
+        variant="neutral"
         isOpen={alertState?.isOpen}
         onClose={handleCloseAlert}
       />

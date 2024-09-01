@@ -9,6 +9,8 @@ import MainLayout from "../../layouts/MainLayout";
 import Home from "../../pages/Home";
 import Favorites from "../../pages/Favorites";
 import Admin from "../../pages/Admin";
+import Cart from "../../pages/Cart";
+import Downloads from "../../pages/Downloads";
 
 /** Массив роутов приложения. */
 const routes = [
@@ -18,10 +20,14 @@ const routes = [
     path: "admin",
     element: <PrivateRoute element={<Admin />} requiredRole="admin" />,
   },
+  { path: "cart", element: <Cart /> },
+  { path: "downloads", element: <Downloads /> },
 ];
 
-/* Добавить страницу с карточкой аудио файла.
-{ path: "audio-card/:id", element: <AudioCard /> }, */
+/* ***********************************************
+Добавить страницу с карточкой аудио файла.
+{ path: "audio-card/:id", element: <AudioCard /> },
+************************************************ */
 
 /**
  * Рекурсивно отображает роуты и дочерние роуты.
