@@ -20,4 +20,8 @@ export const ALERT__TEXTS = {
     title: "Successfully deleted",
     subtitle: "The audio has been successfully deleted from the shopping cart",
   },
+  boughtAudioFilesFromCart: {
+    title: "Successfully purchased",
+    subtitle: "You can download your purchased audio on the Downloads page.",
+  },
 };
