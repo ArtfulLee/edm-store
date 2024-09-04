@@ -143,6 +143,66 @@
       "label": "Play Me Records",
       "isFavorite": false,
       "numberOfSales": 0
+    },
+    {
+      "id": "12",
+      "imgSrc": "https://geo-media.beatport.com/image_size/1400x1400/e0a705bf-a0a0-4bca-9463-bccde2565728.jpg",
+      "audioSrc": "https://geo-samples.beatport.com/track/514b3108-c9ec-49f0-9f6e-b5c2d5b10ab7.LOFI.mp3",
+      "price": "3.25",
+      "title": "Rougher Than Them",
+      "artist": "Ragga Twins, Nitro (ESP)",
+      "genre": "Breaks",
+      "label": "Elektroshok Records",
+      "isFavorite": false,
+      "numberOfSales": 0
+    },
+    {
+      "id": "13",
+      "imgSrc": "https://geo-media.beatport.com/image_size/1400x1400/370e96a6-0f8f-4f02-8a44-bf0d11a5e333.jpg",
+      "audioSrc": "https://geo-samples.beatport.com/track/39d67f53-0aa6-4a41-885d-4dc098a1bcd4.LOFI.mp3",
+      "price": "3.25",
+      "title": "Hyper Go",
+      "artist": "DJ Rasco, Perfect Kombo, Hankook",
+      "genre": "Breaks",
+      "label": "Distorsion Records",
+      "isFavorite": false,
+      "numberOfSales": 0
+    },
+    {
+      "id": "14",
+      "imgSrc": "https://geo-media.beatport.com/image_size/1400x1400/5f4696f8-f219-41e4-b260-25977b466703.jpg",
+      "audioSrc": "https://geo-samples.beatport.com/track/8dc36caf-fcff-4622-9a14-5c105571457f.LOFI.mp3",
+      "price": "3.25",
+      "title": "Wicked Acid",
+      "artist": "Destroyers, Aggresivnes",
+      "genre": "Breaks",
+      "label": "Elektroshok Records",
+      "isFavorite": false,
+      "numberOfSales": 0
+    },
+    {
+      "id": "15",
+      "imgSrc": "https://geo-media.beatport.com/image_size/1400x1400/1f81db07-290f-4945-a911-e451a2055cc8.jpg",
+      "audioSrc": "https://geo-samples.beatport.com/track/330556dc-05fb-4d37-a099-d975c8e7d6ba.LOFI.mp3",
+      "price": "3.25",
+      "title": "Losing Control",
+      "artist": "Bowser",
+      "genre": "Breaks",
+      "label": "Elektroshok Records",
+      "isFavorite": false,
+      "numberOfSales": 0
+    },
+    {
+      "id": "16",
+      "imgSrc": "https://geo-media.beatport.com/image_size/1400x1400/666743da-f854-4776-9f1f-80c8dc040bc9.jpg",
+      "audioSrc": "https://geo-samples.beatport.com/track/a7885388-faba-4f67-9013-402a76c0810b.LOFI.mp3",
+      "price": "3.25",
+      "title": "Classical",
+      "artist": "X Prod",
+      "genre": "Breaks",
+      "label": "Distorsion Records",
+      "isFavorite": false,
+      "numberOfSales": 0
     }
   ],
   "users": [
