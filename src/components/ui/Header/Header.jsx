@@ -44,16 +44,6 @@ const Header = () => {
 
   const location = useLocation();
 
-  /*   const navigate = useNavigate();
-
-  // Достаем функцию, которая показывает сохраненки
-  const { getFavoriteProducts } = useProductStore();
-  const favoritesCount = getFavoriteProducts()?.length;
-  // Показ страницы с сохраненками
-  const handleToOpenFavorites = () => {
-    navigate(`/favorites`);
-  }; */
-
   /**
    * Определяет, активна ли ссылка.
    * @param {string} path - Путь ссылки.
@@ -144,30 +134,6 @@ const Header = () => {
           </div>
 
           <div className="flex gap-x-16 items-center">
-            {/* <button
-              type="button"
-              onClick={handleToOpenFavorites}
-              className={`relative bg-transparent p-1 mr-3 rounded-full text-gray-400 hover:text-gray-500   ${
-                location?.pathname === "/favorites" ? "text-indigo-500" : ""
-              }`}
-            >
-              <svg
-                fill="currentColor"
-                width="24"
-                height="24"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 32 32"
-              >
-                <path d="M16,2a9,9,0,0,0-6,15.69V30l6-4,6,4V17.69A9,9,0,0,0,16,2Zm4,24.26-2.89-1.92L16,23.6l-1.11.74L12,26.26V19.05a8.88,8.88,0,0,0,8,0ZM20.89,16A7,7,0,1,1,23,11,7,7,0,0,1,20.89,16Z" />
-                <rect className="fill-none" width="32" height="32" />
-              </svg>
-
-              {!!favoritesCount && (
-                <span className="w-4 h-4 text-xs/6 px-1 leading-4 text-white inline-flex justify-center justify-items-center bg-indigo-500 rounded-3xl absolute top-0 right-0">
-                  {favoritesCount}
-                </span>
-              )}
-            </button> */}
             <NavLink to="/cart" key="/cart">
               <button
                 type="button"
@@ -175,9 +141,14 @@ const Header = () => {
                   isActiveLink("/cart")
                     ? "text-emerald-400"
                     : "text-neutral-50  "
-                } hover:text-emerald-300 transition duration-100`}
+                } relative hover:text-emerald-300 transition duration-100`}
               >
                 <ShoppingCartIcon />
+                {/* {!!favoritesCount && (
+                  <span className="w-4 h-4 text-xs/6 px-1 leading-4 text-white inline-flex justify-center justify-items-center bg-indigo-500 rounded-3xl absolute top-0 right-0">
+                    {favoritesCount}
+                  </span>
+                )} */}
               </button>
             </NavLink>
 
