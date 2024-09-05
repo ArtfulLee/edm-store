@@ -13,13 +13,24 @@ const Footer = () => {
             </div>
           </div>
           <div className="text-neutral-50">
-            Contact:{" "}
-            <a
-              className="transition duration-100 text-sky-400 hover:text-sky-300"
-              href="mailto:distribution@edm-store.com"
-            >
-              distribution@edm-store.com
-            </a>
+            <div>
+              Support:{" "}
+              <a
+                className="transition duration-100 text-sky-400 hover:text-sky-300"
+                href="mailto:support@edm-store.com"
+              >
+                support@edm-store.com
+              </a>
+            </div>
+            <div>
+              Distribution:{" "}
+              <a
+                className="transition duration-100 text-sky-400 hover:text-sky-300"
+                href="mailto:distribution@edm-store.com"
+              >
+                distribution@edm-store.com
+              </a>
+            </div>
           </div>
           <div className="text-neutral-50">© 2024 EDM STORE</div>
         </div>

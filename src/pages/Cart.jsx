@@ -51,6 +51,13 @@ const Cart = () => {
       ...currentUser.audioFromCart,
     ];
 
+    currentUser.audioFromCart.length &&
+      setAlertState({
+        isOpen: true,
+        title: ALERT__TEXTS.boughtAudioFilesFromCart.title,
+        subtitle: ALERT__TEXTS.boughtAudioFilesFromCart.subtitle,
+      });
+
     currentUser.audioFromCart = [];
 
     setCurrentUserState(currentUser);
