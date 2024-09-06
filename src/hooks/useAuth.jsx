@@ -131,7 +131,9 @@ export const AuthProvider = ({ children }) => {
       } else {
         // Пользователь не найден или данные неверны.
         console.error(`${ERROR__TEXTS.errorDataAuth}`);
+
         // Можно добавить логику для отображения ошибки пользователю.
+        alert(`${ERROR__TEXTS.errorDataAuth}`);
       }
     } catch (error) {
       console.error("Ошибка при входе пользователя:", error);
