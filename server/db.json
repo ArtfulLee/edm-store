@@ -226,8 +226,8 @@
       "lastName": "Lee",
       "email": "artfullee@pochta.pochta",
       "role": "user",
-      "favoritesAudio": ["10", "8"],
-      "boughtAudioFiles": ["1", "3"],
+      "favoritesAudio": ["11", "10", "8"],
+      "boughtAudioFiles": ["0", "1", "3"],
       "audioFromCart": []
     }
   ]
