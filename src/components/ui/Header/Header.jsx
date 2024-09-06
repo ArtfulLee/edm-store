@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
+// store
+import useUsersStore from "../../../store/useUsersStore";
+
 // components
 import useForm from "../../../hooks/useForm";
 import { useAuth } from "../../../hooks/useAuth";
@@ -28,6 +31,11 @@ const navItems = [
  * @returns {JSX.Element} Элемент header.
  */
 const Header = () => {
+  const { getCartCount, getFavoritesCount } = useUsersStore((state) => ({
+    getCartCount: state.getCartCount,
+    getFavoritesCount: state.getFavoritesCount,
+  }));
+
   // Стейт для показа/скрытия модального окна регистрации.
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
@@ -52,7 +60,6 @@ const Header = () => {
   const isActiveLink = (path) => {
     return (
       location?.pathname === path
-      /*|| (path === "/cards" && location?.pathname?.startsWith("/cards")) */
     );
   };
 
@@ -90,6 +97,12 @@ const Header = () => {
     resetForm(); // Сбрасываем форму
   };
 
+  // Получаем количество аудио в корзине.
+  const cartCount = getCartCount();
+
+  // Получаем количество избранных аудио.
+  const favoritesCount = getFavoritesCount();
+
   return (
     <>
       <header className="bg-neutral-900">
@@ -124,9 +137,14 @@ const Header = () => {
                     key={item?.path}
                     className={`${
                       isActiveLink(item?.path) ? "text-emerald-400" : ""
-                    } hover:text-emerald-300 transition duration-100`}
+                    } relative hover:text-emerald-300 transition duration-100`}
                   >
                     {item?.name}
+                    {item?.name === "Favorites" && !!favoritesCount && (
+                      <span className="w-5 h-5 text-sm leading-4 text-neutral-50 inline-flex justify-center justify-items-center bg-pink-500 border-2 border-neutral-950 rounded-3xl absolute -top-2 -right-3">
+                        {favoritesCount}
+                      </span>
+                    )}
                   </NavLink>
                 );
               })}
@@ -144,11 +162,11 @@ const Header = () => {
                 } relative hover:text-emerald-300 transition duration-100`}
               >
                 <ShoppingCartIcon />
-                {/* {!!favoritesCount && (
-                  <span className="w-4 h-4 text-xs/6 px-1 leading-4 text-white inline-flex justify-center justify-items-center bg-indigo-500 rounded-3xl absolute top-0 right-0">
-                    {favoritesCount}
+                {!!cartCount && (
+                  <span className="w-5 h-5 text-sm leading-4 text-neutral-50 inline-flex justify-center justify-items-center bg-pink-500 border-2 border-neutral-950 rounded-3xl absolute -top-2 -right-3">
+                    {cartCount}
                   </span>
-                )} */}
+                )}
               </button>
             </NavLink>
 
