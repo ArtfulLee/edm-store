@@ -19,6 +19,7 @@ const useUsersStore = create((set) => ({
   error: null,
   audioFromCart: [],
   boughtAudioFiles: [],
+  favoritesAudio: [],
 
   /**
    * Получение пользователей сайта.
@@ -61,8 +62,10 @@ const useUsersStore = create((set) => ({
       } else {
         // Иначе, добавляем идентификатор аудио файла в избранные аудио файлы пользователя.
         currentUser.favoritesAudio.push(audioDetails.id);
+        // Сеттим новый массив аудио файлов из корзины в стор пользователя.
       }
 
+      set({ favoritesAudio: [currentUser.favoritesAudio] });
       localStorage.setItem("user", JSON.stringify(currentUser));
     } catch (error) {
       console.log("catch", audioDetails);
@@ -112,7 +115,7 @@ const useUsersStore = create((set) => ({
    * @param {string} idToCart - идентификатор аудио файла для добавления в корзину.
    */
   addAudioToCart: async (idToCart) => {
-    // Получаем пользвоателя из localStorage.
+    // Получаем пользовоателя из localStorage.
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
     // Если пользователь еще не покупал аудио файл по idToCart...
@@ -129,6 +132,18 @@ const useUsersStore = create((set) => ({
         set({ audioFromCart: [currentUser.audioFromCart] });
       }
     }
+  },
+
+  getCartCount: () => {
+    // Получаем пользовоателя из localStorage.
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    return currentUser?.audioFromCart?.length;
+  },
+
+  getFavoritesCount: () => {
+    // Получаем пользовоателя из localStorage.
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    return currentUser?.favoritesAudio?.length;
   },
 }));
 
